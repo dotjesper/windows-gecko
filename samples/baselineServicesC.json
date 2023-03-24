@@ -1,0 +1,35 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{C2511496-D83B-48E4-9636-FAB21CB47517}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Baseline Windows Services configuration settings",
+        "url": "",
+        "version": "1.5.0.3",
+        "date": "2022-03-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsServices": {
+        "enabled": false,
+        "services": [
+            {
+                "Name": "XboxGipSvc",
+                "DisplayName": "Xbox Accessory Management Service",
+                "StartType": "Manual",
+                "StopIfRunning": false
+            },
+            {
+                "Name": "XboxNetApiSvc",
+                "DisplayName": "Xbox Live Networking Service",
+                "StartType": "Manual",
+                "StopIfRunning": false
+            }
+        ]
+    }
+}

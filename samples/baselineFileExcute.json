@@ -1,0 +1,53 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{B11B9F3A-5FB1-4105-A0DB-4C6CAE86AF4D}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Windows desired state configuration - Windows executables",
+        "url": "",
+        "version": "1.0.1.0",
+        "date": "2022-11-25",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRun": {
+        "enabled": true,
+        "items": [
+            {
+                "name": "Microsoft OneDrive",
+                "description": "Download and install OneDriveSetup.exe for all users",
+                "informationURL": "",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "downloadUri": "https://go.microsoft.com/fwlink/p/?LinkID=2182910",
+                "filePath": "%TEMP%\\OneDriveSetup.exe",
+                "ArgumentList": "/allusers /silent"
+            },
+            {
+                "name": "Microsoft Edge",
+                "description": "Update Microsoft Edge",
+                "informationURL": "https://learn.microsoft.com/deployedge/deploy-edge-with-windows-10-updates/",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "downloadUri": "",
+                "filePath": "%ProgramFiles(x86)%\\Microsoft\\EdgeUpdate\\MicrosoftEdgeUpdate.exe",
+                "ArgumentList": "/install appguid={56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}&appname=Microsoft%20Edge&needsadmin=True /silent"
+            },
+            {
+                "name": "WebView2 Runtime",
+                "description": "WebView2 Runtime Evergreen Bootstrapper",
+                "informationURL": "https://developer.microsoft.com/microsoft-edge/webview2/",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "downloadUri": "https://go.microsoft.com/fwlink/p/?LinkId=2124703",
+                "filePath": "%TEMP%\\MicrosoftEdgeWebview2Setup.exe",
+                "ArgumentList": "/silent /install"
+            }
+        ]
+    }
+}

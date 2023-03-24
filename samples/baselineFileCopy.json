@@ -1,0 +1,41 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{935542C3-5384-4B4A-A3B5-C0E81D2BF13A}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Windows desired state configuration",
+        "url": "",
+        "version": "1.0.0.1",
+        "date": "2022-11-26",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsFiles": {
+        "enabled": true,
+        "assetFile": "assets.zip",
+        "assetFolder": "",
+        "items": [
+            {
+                "name": "Windows 10 Start Menu Layout Modification",
+                "description": "Windows Start Menu Layout Modification file copy",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "sourceFile": "LayoutModification-W10.xml",
+                "targetFile": "%SystemDrive%\\Users\\Default\\AppData\\Local\\Microsoft\\Windows\\Shell\\LayoutModification.xml"
+            },
+            {
+                "name": "Windows 11 Taskbar Layout Modification",
+                "description": "Windows Start Menu Layout Modification file copy",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "sourceFile": "LayoutModification-W11.xml",
+                "targetFile": "%SystemDrive%\\Users\\Default\\AppData\\Local\\Microsoft\\Windows\\Shell\\LayoutModification.xml"
+            }
+        ]
+    }
+}

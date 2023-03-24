@@ -1,0 +1,44 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "USER",
+        "guid": "{7F067932-705F-41E9-9FF0-20F4CEAACD7A}",
+        "title": "Windows TCR - Preview",
+        "description": "Windows Time zone, culture and regional settings manager - Preview",
+        "url": "",
+        "version": "0.9.8.5",
+        "date": "2023-03-24",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "requireReboot": false,
+        "runScriptIn64bitPowerShell": true
+    },
+    "windowsTCR": {
+        "enabled": false,
+        "settings": {
+            "CopyUserInternationalSettingsToSystem": true,
+            "windowsTCRfilerRead": false,
+            "windowsTCRfileSave": false,
+            "windowsTCRxaml": "gecko.xaml"
+        },
+        "configuration": {
+            "da-DK": {
+                "culture": "da-DK",
+                "homelocation": 61,
+                "timezone": "Romance Standard Time"
+            },
+            "fi-FI": {
+                "culture": "fi-FI",
+                "homelocation": 71,
+                "timezone": "FLE Standard Time"
+            },
+            "sv-SE": {
+                "culture": "sv-SE",
+                "homelocation": 221,
+                "timezone": "W. Europe Standard Time"
+            }
+        }
+    }
+}

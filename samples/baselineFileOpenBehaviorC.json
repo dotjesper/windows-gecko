@@ -1,0 +1,100 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{C3C5F44D-B2D9-4DC9-889A-C1022635EF1C}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Baseline Windows configuration settings for default file action (double click).",
+        "url": "",
+        "version": "1.5.0.3",
+        "date": "2022-03-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRegistry": {
+        "enabled": false,
+        "items": [
+            {
+                "description": "Set default file action (double click) to Edit for BAT files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "batfile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": ""
+            },
+            {
+                "description": "Set default file action (double click) to Edit for CMD files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "cmdfile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": ""
+            },
+            {
+                "description": "Set default file action (double click) to Edit for JS files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "JSFile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": "Edit"
+            },
+            {
+                "description": "Set default file action (double click) to Edit for REG files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "regfile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": ""
+            },
+            {
+                "description": "Set default file action (double click) to Edit for VBE files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "VBEFile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": "Edit"
+            },
+            {
+                "description": "Set default file action (double click) to Edit for VBS files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "VBSFile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": "Edit"
+            },
+            {
+                "description": "Set default file action (double click) to Edit for WSF files",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCR",
+                "Path": "WSFFile\\Shell",
+                "Name": "(Default)",
+                "Type": "REG_SZ",
+                "Value": "Edit"
+            }
+        ]
+    }
+}

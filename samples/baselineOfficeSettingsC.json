@@ -1,0 +1,34 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{04723163-D300-4816-A7B6-EB884E7E79C3}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "PREVIEW: Baseline Microsoft 365 Apps setting - Computer",
+        "url": "",
+        "version": "0.9.1.0",
+        "date": "2022-03-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRegistry": {
+        "enabled": false,
+        "items": [
+            {
+                "description": "Office 16 # Accept All Eulas",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Office\\16.0\\Registration",
+                "Name": "AcceptAllEulas",
+                "Type": "REG_DWORD",
+                "Value": "1"
+            }
+        ]
+    }
+}

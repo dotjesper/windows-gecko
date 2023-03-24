@@ -1,0 +1,145 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "User",
+        "guid": "{01E0F770-0D92-425F-B197-557F57CAB168}",
+        "title": "Windows gecko-DSC-USER",
+        "description": "Baseline Windows configuration settings for File Explorer.",
+        "url": "",
+        "version": "1.1.0.3",
+        "date": "2022-07-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRegistry": {
+        "enabled": false,
+        "items": [
+            {
+                "description": "Decrease space between items (compact view)",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "UseCompactMode",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Display the full path in the title bar.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+                "Name": "FullPath",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Show hidden files, folders, and drives.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "Hidden",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Hide empty drives.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "HideDrivesWithNoMedia",
+                "Type": "REG_SDWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide extensions for known file types.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "HideFileExt",
+                "Type": "REG_SDWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide folder merge conflicts.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "HideMergeConflicts",
+                "Type": "REG_SDWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Launch folder windows in separate process.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "SeparateProcess",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Show encrypted or compressed NTFS files in color.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowEncryptCompressedColor",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "User Sharing Wizard (Recommended).",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "SharingWizardOn",
+                "Type": "REG_SDWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Always show availability status.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "NavPaneShowAllCloudStates",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Expand to open folder.",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "NavPaneExpandToCurrentFolder",
+                "Type": "REG_SDWORD",
+                "Value": "1"
+            }
+
+        ]
+    }
+}

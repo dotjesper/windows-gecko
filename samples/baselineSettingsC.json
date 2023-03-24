@@ -1,0 +1,89 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{940825F0-0FAE-4E0E-87A0-69F47B3DE7AE}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Baseline Windows configuration settings",
+        "url": "",
+        "version": "1.5.0.3",
+        "date": "2022-03-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRegistry": {
+        "enabled": false,
+        "items": [
+            {
+                "description": "Block Azure AD Workplace join in 3rd-part tenants",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "Software\\Policies\\Microsoft\\Windows\\WorkplaceJoin",
+                "Name": "BlockAADWorkplaceJoin",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Show 'This PC' on Desktop",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel",
+                "Name": "{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Enable Additional LSA Protection",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "System\\CurrentControlSet\\Control\\Lsa",
+                "Name": "RunAsPPL",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Enable Additional LSA Protection",
+                "minOSbuild": "",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "System\\CurrentControlSet\\Control\\Lsa",
+                "Name": "DisableDomainCreds",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Enable Automatically Adjust Active Hours setting",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "Software\\Microsoft\\WindowsUpdate\\UX\\Settings",
+                "Name": "SmartActiveHoursState",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Disable Widgets",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "Software\\Policies\\Microsoft\\Dsh",
+                "Name": "AllowNewsAndInterests",
+                "Type": "DWORD",
+                "Value": "0"
+            }
+        ]
+    }
+}

@@ -1,0 +1,171 @@
+{
+    "metadata": {
+        "enabled": false,
+        "installBehavior": "SYSTEM",
+        "guid": "{D046BB38-D96C-43DE-8588-769A24299A87}",
+        "title": "Windows gecko-DSC-SYSTEM",
+        "description": "Windows Remote Server Administration Tools (RSAT) optional feature configuration settings",
+        "url": "",
+        "version": "1.5.0.3",
+        "date": "2022-03-20",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsOptionalFeatures": {
+        "enabled": false,
+        "features": [],
+        "optionalFeatures": [
+            {
+                "Name": "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Active Directory Domain Services and Lightweight Directory Services Tools",
+                "Description": "Active Directory Domain Services (AD DS) and Active Directory Lightweight Directory Services (AD LDS) Tools include snap-ins and command-line tools for remotely managing AD DS and AD LDS on Windows Server.",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.AzureStack.HCI.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: PowerShell module for Azure Stack HCI",
+                "Description": "PowerShell module for Azure Stack HCI provides the ability to manage Azure Stack HCI",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.BitLocker.Recovery.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: BitLocker Drive Encryption Administration Utilities",
+                "Description": "BitLocker Drive Encryption Administration Utilities include tools for managing BitLocker Drive Encryption features. BitLocker Active Directory Recovery Password Viewer helps to locate BitLocker drive encryption recovery passwords in Active Directory Domain Services (AD DS)",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.CertificateServices.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Active Directory Certificate Services Tools",
+                "Description": "Active Directory Certificate Services Tools include the Certification Authority, Certificate Templates, Enterprise PKI, and Online Responder Management snap-ins for remotely managing AD CS on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.DHCP.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: DHCP Server Tools",
+                "Description": "DHCP Server Tools include the DHCP MMC snap-in, DHCP server netsh context and Windows PowerShell module for DHCP Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.Dns.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: DNS Server Tools",
+                "Description": "DNS Server Tools include the DNS Manager snap-in, dnscmd.exe command-line tool and Windows PowerShell module for DNS Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.FailoverCluster.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Failover Clustering Tools",
+                "Description": "Failover Clustering Tools include the Failover Cluster Manager snap-in, the Cluster-Aware Updating interface, and the Failover Cluster module for Windows PowerShell",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.FileServices.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: File Services Tools",
+                "Description": "File Services Tools include snap-ins and command-line tools for remotely managing the File Services role on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Group Policy Management Tools",
+                "Description": "Group Policy Management Tools include Group Policy Management Console, Group Policy Management Editor, and Group Policy Starter GPO Editor",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.IPAM.Client.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: IP Address Management (IPAM) Client",
+                "Description": "IP Address Management (IPAM) Client is used to connect to and manage a remote IPAM server. IPAM provides a central framework for managing IP address space and corresponding infrastructure servers such as DHCP and DNS in an Active Directory forest",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.LLDP.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Data Center Bridging LLDP Tools",
+                "Description": "Data Center Bridging LLDP Tools include PowerShell tools for remotely managing LLDP agents on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.NetworkController.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Network Controller Management Tools",
+                "Description": "Network Controller Management Tools include PowerShell tools for managing the Network Controller role on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.NetworkLoadBalancing.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Network Load Balancing Tools",
+                "Description": "Network Load Balancing Tools include the Network Load Balancing Manager snap-in, the Network Load Balancing module for Windows PowerShell, and the nlb.exe and wlbs.exe command-line tools",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.RemoteAccess.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Remote Access Management Tools",
+                "Description": "Remote Access Management Tools include graphical and PowerShell tools for managing the Remote Access role on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Remote Desktop Services Tools",
+                "Description": "Remote Desktop Services Tools include snap-ins for Remote Desktop Licensing Manager, Remote Desktop Licensing Diagnostics and Remote Desktop Gateway Manager. Use Server Manager to administer all other RDS role services",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.ServerManager.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Server Manager",
+                "Description": "Server Manager includes the Server Manager console and PowerShell tools for remotely managing Windows Server, and includes tools to remotely configure NIC teaming on Windows Server and Best Practices Analyzer",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.StorageMigrationService.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Storage Migration Service Management Tools",
+                "Description": "Provides management tools for storage migration jobs",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.StorageReplica.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Storage Replica Module for Windows PowerShell",
+                "Description": "Includes PowerShell module to remotely manage the Storage Replica feature on Windows Server 2016",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.SystemInsights.Management.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: System Insights Module for Windows PowerShell",
+                "Description": "System Insights module for Windows PowerShell provides the ability to manage System Insights feature",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.VolumeActivation.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Volume Activation Tools",
+                "Description": "Volume activation Tools can be used to manage volume activation license keys on a Key Management Service (KMS) host or in Microsoft Active Directory Domain Services. These tools can be used to install, activate, and manage one or more volume activation license keys, and to configure KMS settings on Windows Server",
+                "State": "Installed",
+                "RestartNeeded": false
+            },
+            {
+                "Name": "Rsat.WSUS.Tools~~~~0.0.1.0",
+                "DisplayName": "RSAT: Windows Server Update Services Tools",
+                "Description": "Windows Server Update Services Tools include graphical and PowerShell tools for managing WSUS",
+                "State": "Installed",
+                "RestartNeeded": false
+            }
+        ]
+    }
+}
