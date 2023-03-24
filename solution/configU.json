@@ -1,0 +1,155 @@
+{
+    "metadata": {
+        "enabled": true,
+        "installBehavior": "USER",
+        "guid": "{FF4F72E6-9317-4F29-8C54-FFE281004A5F}",
+        "title": "Windows gecko-DSC-USER",
+        "description": "Windows desired state configuration",
+        "url": "",
+        "version": "1.4.1.2",
+        "date": "2022-10-24",
+        "publisher": "dotjesper.com",
+        "developer": "Jesper Nielsen"
+    },
+    "runConditions": {
+        "runScriptIn64bitPowerShell": true,
+        "requireReboot": false
+    },
+    "windowsRegistry": {
+        "enabled": true,
+        "items": [
+            {
+                "description": "Hide 'People' from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\People",
+                "Name": "PeopleBand",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Cortana' icon from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowCortanaButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'News and Interests' icon from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+                "Name": "ShellFeedsTaskbarViewMode",
+                "Type": "DWORD",
+                "Value": "2"
+            },
+            {
+                "description": "Hide 'Search' icon from Taskbar",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                "Name": "SearchboxTaskbarMode",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Task View Button' icon from Taskbars",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowTaskViewButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Widgets' icon from Taskbars",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarDa",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Microsoft Teams Chat' icon from Taskbars",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarMn",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Disable 'Microsoft Teams Chat' auto-start",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppModel\\SystemAppData\\MicrosoftTeams_8wekyb3d8bbwe\\TeamsStartupTask",
+                "Name": "State",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Show Taskbar on all displays",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "MMTaskbarEnabled",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Set Taskbar aligment - Left",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarAl",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Show 'This PC' on Desktop",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel",
+                "Name": "{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Turn on Location Services",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+                "Name": "Value",
+                "Type": "String",
+                "Value": "Allow"
+            }
+        ]
+    }
+}
