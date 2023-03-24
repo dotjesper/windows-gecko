@@ -1,0 +1,8 @@
+#windows-rhythm
+#
+#files to ignore
+
+#directories to ignore
+.bin/
+.docs/
+.notes/
