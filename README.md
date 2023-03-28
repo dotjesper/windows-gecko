@@ -1,6 +1,6 @@
 ---
 Title: README
-Date: March 24, 2023
+Date: March 28, 2023
 Author: dotjesper
 Status: In development
 ---
@@ -90,6 +90,7 @@ The mindset of the solution will aim to allow to limit and/or combine the functi
 │  ├─ baselineServicesC.json
 │  ├─ baselineSettingsC.json
 │  ├─ baselineSettingsU.json
+│  ├─ baselineWindowsTCR.json
 ├─ solution
 │  ├─ assets.zip
 │  ├─ configC.json

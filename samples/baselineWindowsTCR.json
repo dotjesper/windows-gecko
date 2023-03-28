@@ -16,14 +16,20 @@
         "runScriptIn64bitPowerShell": true
     },
     "windowsTCR": {
-        "enabled": false,
+        "enabled": true,
         "settings": {
             "CopyUserInternationalSettingsToSystem": true,
             "windowsTCRfilerRead": false,
             "windowsTCRfileSave": false,
-            "windowsTCRxaml": "gecko.xaml"
+            "windowsTCRxaml": "gecko.xaml",
+            "windowsTCRdefault": "da-DK"
         },
         "configuration": {
+            "de-DE": {
+                "culture": "de-DE",
+                "homelocation": 94,
+                "timezone": "W. Europe Standard Time"
+            },
             "da-DK": {
                 "culture": "da-DK",
                 "homelocation": 61,
@@ -31,8 +37,13 @@
             },
             "fi-FI": {
                 "culture": "fi-FI",
-                "homelocation": 71,
+                "homelocation": 77,
                 "timezone": "FLE Standard Time"
+            },
+            "no-NO": {
+                "culture": "nb-NO",
+                "homelocation": 177,
+                "timezone": "Romance Standard Time"
             },
             "sv-SE": {
                 "culture": "sv-SE",

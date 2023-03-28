@@ -940,8 +940,9 @@ process {
         #
         fLogContent -fLogContent "Current Time zone: $((Get-TimeZone).Id)." -fLogContentComponent "windowsTCR - PREVIEW"
         [string]$timeZone = $((Get-TimeZone).Id)
-        fLogContent -fLogContent "Current Culture: $((get-culture).Name)." -fLogContentComponent "windowsTCR - PREVIEW"
-        [string]$culture = $((get-culture).Name)
+        fLogContent -fLogContent "Current Culture: $((Get-Culture).Name)." -fLogContentComponent "windowsTCR - PREVIEW"
+        [string]$culture = $((Get-Culture).Name)
+        fLogContent -fLogContent "Windows UI Culture: $((Get-UICulture).Name)." -fLogContentComponent "windowsTCR - PREVIEW"
         fLogContent -fLogContent "Current Home Location GeoID: $((Get-WinHomeLocation).GeoId)." -fLogContentComponent "windowsTCR - PREVIEW"
         [int]$homeLocation = $((Get-WinHomeLocation).GeoId)
         #
@@ -1013,7 +1014,7 @@ process {
             try {
                 fLogContent -fLogContent "> Setting Time zone: $((Get-TimeZone).Id) -> $($timeZone)." -fLogContentComponent "windowsTCR - PREVIEW"
                 Set-TimeZone -Name $timezone
-                fLogContent -fLogContent "> Setting Culture: $((get-culture).Name) -> $($culture)." -fLogContentComponent "windowsTCR - PREVIEW"
+                fLogContent -fLogContent "> Setting Culture: $((Get-Culture).Name) -> $($culture)." -fLogContentComponent "windowsTCR - PREVIEW"
                 Set-Culture -CultureInfo $culture
                 fLogContent -fLogContent "> Setting Home Location GeoID: $((Get-WinHomeLocation).GeoId) -> $($homeLocation)." -fLogContentComponent "windowsTCR - PREVIEW"
                 Set-WinHomeLocation -GeoId $homeLocation
@@ -1028,6 +1029,11 @@ process {
                 else {
                     fLogContent -fLogContent "Copying user international settings to system is disabled." -fLogContentComponent "windowsTCR - PREVIEW"
                 }
+                fLogContent -fLogContent "Configured Time zone: $((Get-TimeZone).Id)." -fLogContentComponent "windowsTCR - PREVIEW"
+                #fLogContent -fLogContent "Configured Culture: $((Get-Culture).Name)." -fLogContentComponent "windowsTCR - PREVIEW"
+                #Changes made by the use of Set-Culture cmdlet will take effect on subsequent PowerShell sessions - checking registry for LocaleName value.
+                fLogContent -fLogContent "Configured Culture: $((Get-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName").LocaleName)." -fLogContentComponent "windowsTCR - PREVIEW"
+                fLogContent -fLogContent "Configured Home Location GeoID: $((Get-WinHomeLocation).GeoId)." -fLogContentComponent "windowsTCR - PREVIEW"
             }
             catch {
                 $errMsg = $_.Exception.Message
