@@ -1,5 +1,5 @@
 <# PSScriptInfo
-.VERSION 0.9.9.8
+.VERSION 0.9.9.9
 .GUID 8A7803A1-6E81-4863-8600-F9A105DFD640
 .AUTHOR @dotjesper
 .COMPANYNAME dotjesper.com
@@ -20,6 +20,7 @@
     Windows gecko can easily be implemented using more traditionally deployment methods, like OSD or other methods utilized.
     Current features:
     - WindowsApps: Remove Windows In-box Apps and Store Apps.
+    - WindowsBranding: Configure OEM information and Registration (Coming soon)
     - WindowsFeatures
         - Enable and/or disable Windows features.
         - Enable and/or disable Windows optional features.
@@ -30,6 +31,13 @@
     - WindowsServices: Configure/re-configure Windows Services.
     - WindowsTCR: Windows Time zone, Culture and Regional settings manager (PREVIEW).
     To download sample configuration files and follow the latest progress, visit the project site.
+    ---------------------------------------------------------------------------------
+    LEGAL DISCLAIMER
+    The PowerShell script provided is shared with the community as-is. The author and co-author(s) make no warranties or guarantees regarding its functionality, reliability,
+    or suitability for any specific purpose. Please note that the script may need to be modified or adapted to fit your specific environment or requirements.
+    It is recommended to thoroughly test the script in a non-production environment before using it in a live or critical system. The author and co-author(s) cannot be held
+    responsible for any damages, losses, or adverse effects that may arise from the use of this script. You assume all risks and responsibilities associated with its usage.
+    ---------------------------------------------------------------------------------
 .PARAMETER configFile
     Start script with the defined configuration file to be used for the task.
     If no configuration file is defined, script will look for .\config.json. If the configuration is not found or invalid, the script will exit.
@@ -130,7 +138,9 @@ begin {
     catch {
         $fLogContentDisable = $true
         Write-Warning -Message "Unable to write to output file $fLogContentFile"
-        Write-Warning -Message $_.Exception.Message
+        Write-Verbose -Message $_.Exception.Message
+        Write-Verbose -Message "Redireting output file to '$($Env:Temp)' folder"
+        [string]$fLogContentFile = "$($Env:Temp)\$fLogContentpkg.log"
     }
     finally {}
     #endregion
@@ -310,6 +320,14 @@ begin {
                         }
                         #Adding registry item.
                         New-ItemProperty -Path "$($froot):\$($fpath)" -Name "$fname" -PropertyType "$fpropertyType" -Value "$fvalue" -Force | Out-Null
+                        #Validating registry item.
+                        $fcurrentValue = $(Get-ItemProperty -path "$($froot):\$($fpath)" -name $fname -ErrorAction SilentlyContinue)."$fname"
+                        if ($fcurrentValue -eq $fvalue) {
+                            fLogContent -fLogContent "registry value configuration succesfull [ '$fcurrentValue' ]" -fLogContentComponent "fRegistryItem"
+                        }
+                        else {
+                            fLogContent -fLogContent "registry value configuration failed" -fLogContentComponent "fRegistryItem" -fLogContentType 3
+                        }
                     }
                     catch {
                         $errMsg = $_.Exception.Message
@@ -506,6 +524,10 @@ process {
     else {
         fLogContent -fLogContent "Windows Apps is disabled." -fLogContentComponent "windowsApps"
     }
+    #endregion
+    #
+    #region: windowsBranding - PREVIEW
+    ## windowsBranding is coming soon ##
     #endregion
     #
     #region :: windowsFeatures
@@ -725,7 +747,7 @@ process {
     }
     #endregion
     #
-    #region :: windowsGroups
+    #region :: windowsGroups - PREVIEW
     ## windowsGroups is coming soon ##
     #endregion
     #
@@ -1023,7 +1045,7 @@ process {
                         fLogContent -fLogContent "Copying user international settings to system." -fLogContentComponent "windowsTCR - PREVIEW"
                         Copy-UserInternationalSettingsToSystem -WelcomeScreen $true -NewUser $true
                     } else {
-                        fLogContent -fLogContent "Copying user international settings to system is not supported on this build." -fLogContentType 2 -fLogContentComponent "windowsTCR - PREVIEW"
+                        fLogContent -fLogContent "Copying user international settings to system is not supported on this Windows build." -fLogContentType 2 -fLogContentComponent "windowsTCR - PREVIEW"
                     }
                 }
                 else {

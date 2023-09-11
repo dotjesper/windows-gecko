@@ -68,7 +68,7 @@ The mindset of the solution will aim to allow to limit and/or combine the functi
 
 **Windows gecko** is developed and tested for Windows 10 21H2 Pro and Enterprise 64-bit and newer and require PowerShell 5.1.
 
-**NOTE** Applying Windows desired state configurationn, **Windows gecko** should be configured to run in either SYSTEM or USER context. Applying device Baseline in SYSTEM context, will be required to run with local administrative rights (Local administrator or System). Combining device Baseline across SYSTEM and USER is highly unadvisable and might cause undesired results.
+**NOTE** Applying Windows desired state configuration, **Windows gecko** should be configured to run in either SYSTEM or USER context. Applying device Baseline in SYSTEM context, will be required to run with local administrative rights (Local administrator or System). Combining device Baseline across SYSTEM and USER is highly unadvisable and might cause undesired results.
 
 ## Repository content
 

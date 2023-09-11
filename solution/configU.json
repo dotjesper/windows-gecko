@@ -63,7 +63,18 @@
                 "Value": "0"
             },
             {
-                "description": "Hide 'Task View Button' icon from Taskbars",
+                "description": "Hide 'Copilot (Preview)' icon from Taskbar",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKCU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowCopilotButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Task View Button' icon from Taskbar",
                 "minOSbuild": "22000",
                 "maxOSbuild": "",
                 "item": "add",
@@ -74,7 +85,7 @@
                 "Value": "0"
             },
             {
-                "description": "Hide 'Widgets' icon from Taskbars",
+                "description": "Hide 'Widgets' icon from Taskbar",
                 "minOSbuild": "22000",
                 "maxOSbuild": "",
                 "item": "add",
@@ -85,7 +96,7 @@
                 "Value": "0"
             },
             {
-                "description": "Hide 'Microsoft Teams Chat' icon from Taskbars",
+                "description": "Hide 'Microsoft Teams Chat' icon from Taskbar",
                 "minOSbuild": "22000",
                 "maxOSbuild": "",
                 "item": "add",
@@ -138,18 +149,44 @@
                 "Name": "{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
                 "Type": "DWORD",
                 "Value": "0"
-            },
-            {
-                "description": "Turn on Location Services",
-                "minOSbuild": "30000",
-                "maxOSbuild": "",
-                "item": "add",
-                "root": "HKCU",
-                "Path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
-                "Name": "Value",
-                "Type": "String",
-                "Value": "Allow"
             }
         ]
+    },
+    "windowsTCR": {
+        "enabled": true,
+        "settings": {
+            "CopyUserInternationalSettingsToSystem": true,
+            "windowsTCRfilerRead": false,
+            "windowsTCRfileSave": false,
+            "windowsTCRxaml": "gecko.xaml",
+            "windowsTCRdefault": "da-DK"
+        },
+        "configuration": {
+            "da-DK": {
+                "culture": "da-DK",
+                "homelocation": 61,
+                "timezone": "Romance Standard Time"
+            },
+            "fi-FI": {
+                "culture": "fi-FI",
+                "homelocation": 77,
+                "timezone": "FLE Standard Time"
+            },
+            "lv-LV": {
+                "culture": "lv-LV",
+                "homelocation": 140,
+                "timezone": "FLE Standard Time"
+            },
+            "no-NO": {
+                "culture": "nb-NO",
+                "homelocation": 177,
+                "timezone": "Romance Standard Time"
+            },
+            "sv-SE": {
+                "culture": "sv-SE",
+                "homelocation": 221,
+                "timezone": "W. Europe Standard Time"
+            }
+        }
     }
 }

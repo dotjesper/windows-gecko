@@ -7,7 +7,7 @@
         "description": "Windows desired state configuration",
         "url": "",
         "version": "1.7.0.2",
-        "date": "2022-12-07",
+        "date": "2023-08-21",
         "publisher": "dotjesper.com",
         "developer": "Jesper Nielsen"
     },
@@ -275,6 +275,13 @@
                 "Description": "Play audio and video files on your local machine and on the Internet",
                 "State": "NotPresent",
                 "RestartNeeded": false
+            },
+            {
+                "Name": "Microsoft.Windows.WordPad~~~~0.0.1.0",
+                "DisplayName": "WordPad",
+                "Description": "Create, open, and edit .rtf, .docx, and .txt files instantly",
+                "State": "NotPresent",
+                "RestartNeeded": false
             }
         ]
     },
@@ -297,14 +304,6 @@
                 "maxOSbuild": "",
                 "sourceFile": "LayoutModification-W11.xml",
                 "targetFile": "%SystemDrive%\\Users\\Default\\AppData\\Local\\Microsoft\\Windows\\Shell\\LayoutModification.xml"
-            },
-            {
-                "name": "Windows TCR",
-                "description": "Windows time, culture and regional settings manager",
-                "minOSbuild": "30000",
-                "maxOSbuild": "",
-                "sourceFile": "windowsTCR.json",
-                "targetFile": "%SystemDrive%\\Recovery\\OEM\\windowsTCR.json"
             }
         ]
     },
@@ -356,15 +355,15 @@
                 "Value": "1"
             },
             {
-                "description": "Disable Smart App Control",
-                "minOSbuild": "22621",
+                "description": "Enable Win32 Long Paths",
+                "minOSbuild": "",
                 "maxOSbuild": "",
                 "item": "add",
                 "root": "HKLM",
-                "Path": "SYSTEM\\CurrentControlSet\\Control\\CI\\Policy",
-                "Name": "VerifiedAndReputablePolicyState",
+                "Path": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                "Name": "LongPathsEnabled",
                 "Type": "DWORD",
-                "Value": "0"
+                "Value": "1"
             },
             {
                 "description": "Disable .Net Framwork RC4 Cipher",
@@ -398,6 +397,17 @@
                 "Name": "SmartActiveHoursState",
                 "Type": "DWORD",
                 "Value": "1"
+            },
+            {
+                "description": "Disable Smart App Control",
+                "minOSbuild": "22621",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKLM",
+                "Path": "SYSTEM\\CurrentControlSet\\Control\\CI\\Policy",
+                "Name": "VerifiedAndReputablePolicyState",
+                "Type": "DWORD",
+                "Value": "0"
             },
             {
                 "description": "Disable Widgets",
@@ -454,6 +464,16 @@
                 "downloadUri": "https://go.microsoft.com/fwlink/p/?LinkId=2124703",
                 "filePath": "%TEMP%\\MicrosoftEdgeWebview2Setup.exe",
                 "ArgumentList": "/silent /install"
+            },
+            {
+                "name": "Remove 'Authenticated Users' permissions in C:",
+                "description": "Remove 'Authenticated Users' permissions in C: root",
+                "informationURL": "https://superuser.com/questions/794611/permissions-for-authenticated-users-on-c",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "downloadUri": "",
+                "filePath": "%windir%\\system32\\icacls.exe",
+                "ArgumentList": "C:\\ /remove:g *S-1-5-11"
             }
         ]
     },
