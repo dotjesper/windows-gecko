@@ -899,7 +899,7 @@ process {
                 #endregion
             }
             else {
-                fLogContent -fLogContent "Item $($windowsFileItem.description) entry not for this OS build." -fLogContentComponent "windowsRun"
+                fLogContent -fLogContent "Item $($windowsExecutable.description) entry not for this OS build." -fLogContentComponent "windowsRun"
             }
         }
         fLogContent -fLogContent "Windows Executables finished." -fLogContentComponent "windowsRun"
