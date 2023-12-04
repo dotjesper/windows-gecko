@@ -1,7 +1,7 @@
 {
     "metadata": {
         "enabled": false,
-        "installBehavior": "USER",
+        "installBehavior": "SYSTEM",
         "guid": "{7F067932-705F-41E9-9FF0-20F4CEAACD7A}",
         "title": "Windows TCR - Preview",
         "description": "Windows Time zone, culture and regional settings manager - Preview",
@@ -19,37 +19,54 @@
         "enabled": true,
         "settings": {
             "CopyUserInternationalSettingsToSystem": true,
-            "windowsTCRfilerRead": false,
-            "windowsTCRfileSave": false,
             "windowsTCRxaml": "gecko.xaml",
-            "windowsTCRdefault": "da-DK"
+            "windowsTCRdefault": "",
+            "useComputerName": true,
+            "useComputerNameOperator": "Contains"
         },
-        "configuration": {
-            "de-DE": {
-                "culture": "de-DE",
-                "homelocation": 94,
-                "timezone": "W. Europe Standard Time"
-            },
-            "da-DK": {
+        "configurations": [
+            {
+                "CID": "DEN",
+                "description": "",
                 "culture": "da-DK",
                 "homelocation": 61,
                 "timezone": "Romance Standard Time"
             },
-            "fi-FI": {
+            {
+                "CID": "GER",
+                "description": "",
+                "culture": "de-DE",
+                "homelocation": 94,
+                "timezone": "W. Europe Standard Time"
+            },
+            {
+                "CID": "FIN",
+                "description": "",
                 "culture": "fi-FI",
                 "homelocation": 77,
                 "timezone": "FLE Standard Time"
             },
-            "no-NO": {
+            {
+                "CID": "LAT",
+                "description": "",
+                "culture": "lv-LV",
+                "homelocation": 140,
+                "timezone": "FLE Standard Time"
+            },
+            {
+                "CID": "NOR",
+                "description": "",
                 "culture": "nb-NO",
                 "homelocation": 177,
                 "timezone": "Romance Standard Time"
             },
-            "sv-SE": {
+            {
+                "CID": "SWE",
+                "description": "",
                 "culture": "sv-SE",
                 "homelocation": 221,
                 "timezone": "W. Europe Standard Time"
             }
-        }
+        ]
     }
 }

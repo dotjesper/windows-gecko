@@ -344,7 +344,7 @@
                 "Value": "1"
             },
             {
-                "description": "Enable Additional LSA Protection",
+                "description": "Disable storage of passwords and credentials for network authentication",
                 "minOSbuild": "",
                 "maxOSbuild": "",
                 "item": "add",
@@ -417,6 +417,127 @@
                 "root": "HKLM",
                 "Path": "Software\\Policies\\Microsoft\\Dsh",
                 "Name": "AllowNewsAndInterests",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'People' from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\People",
+                "Name": "PeopleBand",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Cortana' icon from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowCortanaButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'News and Interests' icon from Taskbar",
+                "minOSbuild": "",
+                "maxOSbuild": "19045",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+                "Name": "ShellFeedsTaskbarViewMode",
+                "Type": "DWORD",
+                "Value": "2"
+            },
+            {
+                "description": "Hide 'Search' icon from Taskbar",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                "Name": "SearchboxTaskbarMode",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Copilot (Preview)' icon from Taskbar",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowCopilotButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Task View Button' icon from Taskbar",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "ShowTaskViewButton",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Widgets' icon from Taskbar",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarDa",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Hide 'Microsoft Teams Chat' icon from Taskbar",
+                "minOSbuild": "22000",
+                "maxOSbuild": "22621",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarMn",
+                "Type": "DWORD",
+                "Value": "0"
+            },
+            {
+                "description": "Disable 'Microsoft Teams Chat' auto-start",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppModel\\SystemAppData\\MicrosoftTeams_8wekyb3d8bbwe\\TeamsStartupTask",
+                "Name": "State",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Show Taskbar on all displays",
+                "minOSbuild": "22000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "MMTaskbarEnabled",
+                "Type": "DWORD",
+                "Value": "1"
+            },
+            {
+                "description": "Set Taskbar aligment to Left",
+                "minOSbuild": "30000",
+                "maxOSbuild": "",
+                "item": "add",
+                "root": "HKDU",
+                "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                "Name": "TaskbarAl",
                 "Type": "DWORD",
                 "Value": "0"
             }
@@ -497,6 +618,60 @@
                 "DisplayName": "Secondary Logon",
                 "StartType": "Disabled",
                 "StopIfRunning": true
+            }
+        ]
+    },
+    "windowsTCR": {
+        "enabled": true,
+        "settings": {
+            "CopyUserInternationalSettingsToSystem": true,
+            "windowsTCRxaml": "gecko.xaml",
+            "windowsTCRdefault": "",
+            "useComputerName": true,
+            "useComputerNameOperator": "Contains"
+        },
+        "configurations": [
+            {
+                "CID": "DEN",
+                "description": "",
+                "culture": "da-DK",
+                "homelocation": 61,
+                "timezone": "Romance Standard Time"
+            },
+            {
+                "CID": "GER",
+                "description": "",
+                "culture": "de-DE",
+                "homelocation": 94,
+                "timezone": "W. Europe Standard Time"
+            },
+            {
+                "CID": "FIN",
+                "description": "",
+                "culture": "fi-FI",
+                "homelocation": 77,
+                "timezone": "FLE Standard Time"
+            },
+            {
+                "CID": "LAT",
+                "description": "",
+                "culture": "lv-LV",
+                "homelocation": 140,
+                "timezone": "FLE Standard Time"
+            },
+            {
+                "CID": "NOR",
+                "description": "",
+                "culture": "nb-NO",
+                "homelocation": 177,
+                "timezone": "Romance Standard Time"
+            },
+            {
+                "CID": "SWE",
+                "description": "",
+                "culture": "sv-SE",
+                "homelocation": 221,
+                "timezone": "W. Europe Standard Time"
             }
         ]
     }

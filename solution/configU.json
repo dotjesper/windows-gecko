@@ -98,7 +98,7 @@
             {
                 "description": "Hide 'Microsoft Teams Chat' icon from Taskbar",
                 "minOSbuild": "22000",
-                "maxOSbuild": "",
+                "maxOSbuild": "22621",
                 "item": "add",
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
@@ -129,7 +129,7 @@
                 "Value": "1"
             },
             {
-                "description": "Set Taskbar aligment - Left",
+                "description": "Set Taskbar aligment to Left",
                 "minOSbuild": "30000",
                 "maxOSbuild": "",
                 "item": "add",
@@ -155,38 +155,55 @@
     "windowsTCR": {
         "enabled": true,
         "settings": {
-            "CopyUserInternationalSettingsToSystem": true,
-            "windowsTCRfilerRead": false,
-            "windowsTCRfileSave": false,
+            "CopyUserInternationalSettingsToSystem": false,
             "windowsTCRxaml": "gecko.xaml",
-            "windowsTCRdefault": "da-DK"
+            "windowsTCRdefault": "",
+            "useComputerName": true,
+            "useComputerNameOperator": "Contains"
         },
-        "configuration": {
-            "da-DK": {
+        "configurations": [
+            {
+                "CID": "DEN",
+                "description": "",
                 "culture": "da-DK",
                 "homelocation": 61,
                 "timezone": "Romance Standard Time"
             },
-            "fi-FI": {
+            {
+                "CID": "GER",
+                "description": "",
+                "culture": "de-DE",
+                "homelocation": 94,
+                "timezone": "W. Europe Standard Time"
+            },
+            {
+                "CID": "FIN",
+                "description": "",
                 "culture": "fi-FI",
                 "homelocation": 77,
                 "timezone": "FLE Standard Time"
             },
-            "lv-LV": {
+            {
+                "CID": "LAT",
+                "description": "",
                 "culture": "lv-LV",
                 "homelocation": 140,
                 "timezone": "FLE Standard Time"
             },
-            "no-NO": {
+            {
+                "CID": "NOR",
+                "description": "",
                 "culture": "nb-NO",
                 "homelocation": 177,
                 "timezone": "Romance Standard Time"
             },
-            "sv-SE": {
+            {
+                "CID": "SWE",
+                "description": "",
                 "culture": "sv-SE",
                 "homelocation": 221,
                 "timezone": "W. Europe Standard Time"
             }
-        }
+        ]
     }
 }
