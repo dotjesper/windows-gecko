@@ -1,6 +1,6 @@
 ---
 Title: README
-Date: December 4, 2023
+Date: December 18, 2023
 Author: dotjesper
 Status: In development
 ---
@@ -67,7 +67,7 @@ The mindset of the solution will aim to allow to limit and/or combine the functi
 
 ## Requirements
 
-**Windows gecko** is developed and tested for Windows 10 21H2 Pro and Enterprise 64-bit and newer and require PowerShell 5.1.
+**Windows gecko** is developed and tested for Windows 10 22H2 Pro and Enterprise 64-bit and newer and require PowerShell 5.1.
 
 **NOTE** Applying Windows desired state configuration, **Windows gecko** should be configured to run in either SYSTEM or USER context. Applying device Baseline in SYSTEM context, will be required to run with local administrative rights (Local administrator or System). Combining device Baseline across SYSTEM and USER is highly unadvisable and might cause undesired results.
 
@@ -104,7 +104,7 @@ The mindset of the solution will aim to allow to limit and/or combine the functi
 
 **Windows gecko** require a configuration file to work. The configuration file should be a valid json file, and the encoding should be UTF-8. The benefit using external configuration files, makes the solution more versatile and you can code sign the script once, and reuse the script for multiply deployment/tasks.
 
-> I highly recommend code signing any script used in a deployment scenario. If you are unable to sign the script yourself, feel free to download a signed version from the [releases](https://github.com/dotjesper/windows-gecko/releases/).
+> I highly recommend code signing any script used in a deployment scenario.
 
 ### Parameters
 

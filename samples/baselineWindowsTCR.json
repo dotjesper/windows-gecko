@@ -6,8 +6,8 @@
         "title": "Windows TCR - Preview",
         "description": "Windows Time zone, culture and regional settings manager - Preview",
         "url": "",
-        "version": "0.9.8.5",
-        "date": "2023-03-24",
+        "version": "0.9.9.1",
+        "date": "2023-12-11",
         "publisher": "dotjesper.com",
         "developer": "Jesper Nielsen"
     },
@@ -19,6 +19,7 @@
         "enabled": true,
         "settings": {
             "CopyUserInternationalSettingsToSystem": true,
+            "SetTimeZoneAutomatically": false,
             "windowsTCRxaml": "gecko.xaml",
             "windowsTCRdefault": "",
             "useComputerName": true,

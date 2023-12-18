@@ -107,4 +107,4 @@ Install behavior: SYSTEM / USER
 
 Target: Windows Time zone, Culture and Regional settings
 
-Version: 0.9.8.5
+Version: 0.9.9.1

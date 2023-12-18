@@ -318,7 +318,7 @@
                 "root": "HKLM",
                 "Path": "Software\\Policies\\Microsoft\\Windows\\WorkplaceJoin",
                 "Name": "BlockAADWorkplaceJoin",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -329,7 +329,7 @@
                 "root": "HKLM",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel",
                 "Name": "{20D04FE0-3AEA-1069-A2D8-08002B30309D}",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -340,7 +340,7 @@
                 "root": "HKLM",
                 "Path": "System\\CurrentControlSet\\Control\\Lsa",
                 "Name": "RunAsPPL",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -351,7 +351,7 @@
                 "root": "HKLM",
                 "Path": "System\\CurrentControlSet\\Control\\Lsa",
                 "Name": "DisableDomainCreds",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -362,7 +362,7 @@
                 "root": "HKLM",
                 "Path": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
                 "Name": "LongPathsEnabled",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -373,7 +373,7 @@
                 "root": "HKLM",
                 "Path": "SOFTWARE\\Microsoft\\.NETFramework\\v4.0.30319",
                 "Name": "SchUseStrongCrypto",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -384,7 +384,7 @@
                 "root": "HKLM",
                 "Path": "SOFTWARE\\Wow6432Node\\Microsoft\\.NETFramework\\v4.0.30319",
                 "Name": "SchUseStrongCrypto",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -395,7 +395,7 @@
                 "root": "HKLM",
                 "Path": "Software\\Microsoft\\WindowsUpdate\\UX\\Settings",
                 "Name": "SmartActiveHoursState",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -406,7 +406,7 @@
                 "root": "HKLM",
                 "Path": "SYSTEM\\CurrentControlSet\\Control\\CI\\Policy",
                 "Name": "VerifiedAndReputablePolicyState",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -417,7 +417,7 @@
                 "root": "HKLM",
                 "Path": "Software\\Policies\\Microsoft\\Dsh",
                 "Name": "AllowNewsAndInterests",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -428,7 +428,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\People",
                 "Name": "PeopleBand",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -439,7 +439,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "ShowCortanaButton",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -450,7 +450,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
                 "Name": "ShellFeedsTaskbarViewMode",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "2"
             },
             {
@@ -461,7 +461,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Search",
                 "Name": "SearchboxTaskbarMode",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -472,7 +472,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "ShowCopilotButton",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -483,7 +483,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "ShowTaskViewButton",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -494,7 +494,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "TaskbarDa",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -505,7 +505,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "TaskbarMn",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -516,7 +516,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppModel\\SystemAppData\\MicrosoftTeams_8wekyb3d8bbwe\\TeamsStartupTask",
                 "Name": "State",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -527,7 +527,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "MMTaskbarEnabled",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -538,7 +538,7 @@
                 "root": "HKDU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "TaskbarAl",
-                "Type": "DWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             }
         ]
@@ -625,6 +625,7 @@
         "enabled": true,
         "settings": {
             "CopyUserInternationalSettingsToSystem": true,
+            "SetTimeZoneAutomatically": false,
             "windowsTCRxaml": "gecko.xaml",
             "windowsTCRdefault": "",
             "useComputerName": true,

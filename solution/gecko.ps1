@@ -1,6 +1,6 @@
 <# PSScriptInfo
-.VERSION 1.0.1.5
-.GUID 8A7803A1-6E81-4863-8600-F9A105DFD640
+.VERSION 1.0.1.6
+.GUID 10E1CBFB-EBAF-4329-87C1-225132847F61
 .AUTHOR @dotjesper
 .COMPANYNAME dotjesper.com
 .COPYRIGHT dotjesper.com
@@ -1024,11 +1024,8 @@ process {
         fLogContent -fLogContent "Windows Time zone, culture, and regional settings manager is enabled" -fLogContentComponent "$region"
         #
         fLogContent -fLogContent "Current Time zone: $((Get-TimeZone).Id)" -fLogContentComponent "$region"
-        [string]$timeZone = $((Get-TimeZone).Id)
         fLogContent -fLogContent "Current Culture: $((Get-Culture).Name)" -fLogContentComponent "$region"
-        [string]$culture = $((Get-Culture).Name)
         fLogContent -fLogContent "Current Home Location GeoID: $((Get-WinHomeLocation).GeoId)" -fLogContentComponent "$region"
-        [int]$homeLocation = $((Get-WinHomeLocation).GeoId)
         #
         fLogContent -fLogContent "Reading Windows Time zone, culture, and regional settings from configuration file" -fLogContentComponent "$region"
         [array]$windowsTCRconfigurations = $($config.windowsTCR.configurations)
@@ -1083,11 +1080,11 @@ process {
                 }
                 try {
                     fLogContent -fLogContent "> Setting Time zone: $((Get-TimeZone).Id) -> $($windowsTCRSettings.timezone)" -fLogContentComponent "$region"
-                    Set-TimeZone -Name $timezone
+                    Set-TimeZone -Name $($windowsTCRSettings.timezone)
                     fLogContent -fLogContent "> Setting Culture: $((Get-Culture).Name) -> $($windowsTCRSettings.culture)" -fLogContentComponent "$region"
-                    Set-Culture -CultureInfo $culture
+                    Set-Culture -CultureInfo $($windowsTCRSettings.culture)
                     fLogContent -fLogContent "> Setting Home Location GeoID: $((Get-WinHomeLocation).GeoId) -> $($windowsTCRSettings.homelocation)" -fLogContentComponent "$region"
-                    Set-WinHomeLocation -GeoId $homeLocation
+                    Set-WinHomeLocation -GeoId $($windowsTCRSettings.homelocation)
                     try {
                         if ($($config.windowsTCR.settings.CopyUserInternationalSettingsToSystem)) {
                             if ($($([environment]::OSVersion.Version).Build) -ge 22000) {
@@ -1133,6 +1130,32 @@ process {
             fLogContent -fLogContent "Windows Time zone, culture, and regional settings configurations not defined in configuration file" -fLogContentComponent "$region" -fLogContentType 2
             fLogContent -fLogContent "Windows Time zone, culture, and regional settings not re-configured" -fLogContentComponent "$region"
         }
+        #region :: Set Time Zone Automatically
+        if ($($config.windowsTCR.settings.SetTimeZoneAutomatically) -eq $true) {
+            try {
+                fLogContent -fLogContent "Set time zone automatically is enabled" -fLogContentComponent "$region"
+                #region :: Configure Set Time Zone Automatically - Service
+                fLogContent -fLogContent "adding HKLM:\System\CurrentControlSet\Services\tzautoupdate [REG_DWORD] Start ""3""" -fLogContentComponent "$region"
+                fRegistryItem -task "add" -froot "HKLM" -fpath "System\CurrentControlSet\Services\tzautoupdate" -fname "Start" -fpropertyType "REG_DWORD" -fvalue "3"
+                #endregion
+                #region :: Configure Set Time Zone Automatically - User Consent
+                fLogContent -fLogContent "adding HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location [REG_SZ] Value ""Allow""" -fLogContentComponent "$region"
+                fRegistryItem -task "add" -froot "HKLM" -fpath "Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -fname "Value" -fpropertyType "REG_SZ" -fvalue "Allow"
+                #endregion
+            }
+            catch {
+                $errMsg = $_.Exception.Message
+                fLogContent -fLogContent "ERROR: $errMsg" -fLogContentComponent "$region" -fLogContentType 3
+                if ($exitOnError) {
+                    exit 1
+                }
+            }
+            Finally {}
+        }
+        else {
+            fLogContent -fLogContent "Set time zone automatically is disabled" -fLogContentComponent "$region"
+        }
+        #endregion
         fLogContent -fLogContent "Windows Time zone, culture, and regional settings manager finished" -fLogContentComponent "$region"
     }
     else {

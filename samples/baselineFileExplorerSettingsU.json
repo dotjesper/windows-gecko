@@ -26,7 +26,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "UseCompactMode",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -37,7 +37,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
                 "Name": "FullPath",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -48,7 +48,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "Hidden",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -59,7 +59,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "HideDrivesWithNoMedia",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -70,7 +70,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "HideFileExt",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -81,7 +81,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "HideMergeConflicts",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -92,7 +92,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "SeparateProcess",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -103,7 +103,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "ShowEncryptCompressedColor",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -114,7 +114,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "SharingWizardOn",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "0"
             },
             {
@@ -125,7 +125,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "NavPaneShowAllCloudStates",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             },
             {
@@ -136,7 +136,7 @@
                 "root": "HKCU",
                 "Path": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                 "Name": "NavPaneExpandToCurrentFolder",
-                "Type": "REG_SDWORD",
+                "Type": "REG_DWORD",
                 "Value": "1"
             }
 
