@@ -851,6 +851,7 @@ process {
             do {
                 fLogContent -fLogContent "Sleeping 15 secunds before attemting unloading Default User Registry hive" -fLogContentComponent "$region"
                 Start-Sleep -Seconds 15
+		[gc]::Collect()
                 $processResult = Start-Process -FilePath "$env:WINDIR\system32\reg.exe" -ArgumentList "UNLOAD $defaultUserRegistryRoot\$defaultUserRegistryKey" -WindowStyle Hidden -PassThru -Wait
                 $counter++
                 fLogContent -fLogContent "Unloading Default User Registry hive attempted [ $($processResult.ExitCode) | $($counter) ]" -fLogContentComponent "$region"
