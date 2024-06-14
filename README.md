@@ -1,6 +1,6 @@
 ---
 Title: README
-Date: December 18, 2023
+Date: June 14, 2024
 Author: dotjesper
 Status: In development
 ---
@@ -26,7 +26,6 @@ According to Wikipedia, geckos are small, mostly carnivorous lizards that have a
 
 **Windows gecko** is exactly that, a multifunctional script, small in size, designed to adapt to multiple Windows management environments and using “clicking sounds” to ensure every steps is checked and recorded.
 
-
 This repository is under development and alive and for the most, kicking - I welcome any feedback or suggestions for improvement. Reach out on [Twitter](https://twitter.com/dotjesper "dotjesper"), I read Direct Messages (DMs) and allow them from people I do not follow. For other means of contact, please visit [https://dotjesper.com/contact/](https://dotjesper.com/contact/ "Contact")
 
 Do not hesitate to reach out if issues arise or new functionality and improvement comes to mind.
@@ -43,18 +42,18 @@ Windows gecko can easily be implemented using more traditionally deployment meth
 
 ## Synopsis
 
-**Windows gecko** was built to remove a few Windows features from Windows devices, managed using Microsoft Endpoint Manager and evolved into a tool to align Windows feature configuration, allowing to disable and enable Windows features. While building the key features, additional requirements surfaced, and being able to baseline Windows In-box App was added, allowing administrators to easily remove unwanted apps as part of the initially configuration, e.g., when enforcing corporate defaults as part of Windows Autopilot scenarios.
+**Windows gecko** was created to remove some Windows features from Windows devices, managed by Microsoft Intune, and advanced into a tool to match Windows feature configuration, allowing to disable and enable Windows features. While developing the key features, more requirements emerged, and the ability to baseline Windows In-box App was added, allowing administrators to easily uninstall unwanted apps as part of the initial configuration, e.g., when applying corporate defaults as part of Windows Autopilot scenarios. 
 
-Further improvements were added, baseline conditions were requested, and Windows Service configuration and Windows Registry configuration options has been included.
+More enhancements were added, baseline conditions were asked for, and Windows Service configuration and Windows Registry configuration options were included, and more features have been added and more ideas are cocking.
 
-There as several ways to achieve a Windows desired state configuration baseline and several approaches. **Windows gecko** is built upon the requirement to provide a default configuration baseline, or a **desired state configuration**, and is not meant to stop the end user to install a previously removed app, or circumvent a desired setting, purely to allow device administrators to provide a default baseline, or corporate baseline, to the end user as part of a [Windows Autopilot](https://learn.microsoft.com/en-us/mem/autopilot/windows-autopilot "Overview of Windows Autopilot") scenario.
+There are several methods to achieve aWindows **desired state configuration** baseline and several approaches. **Windows gecko** is based on the requirement to provide a default configuration baseline, or a desired state configuration, and is not meant to prevent the end user from installing a previously uninstalled app, or bypass a desired setting, only to allow device administrators to provide a default baseline, or corporate baseline, to the end user as part of a[Windows Autopilot](https://learn.microsoft.com/en-us/mem/autopilot/windows-autopilot "Overview of Windows Autopilot") scenario.
 
-The mindset of the solution will aim to allow to limit and/or combine the functionalities best suited for the task, meaning if Windows feature configuration were to be applied, this should be achievable without the Windows Registry configuration. Also, very important, is to be able to apply Windows baselines configuration in one or multiple packages in either system or user context, without changing the code – which is why all configurations is achievable using configuration files (json). This will help ensure minimal effort to create a new Windows desired state configuration, being easily completed without any code changes or re-signing the provided code.
+The mindset of the solution will aim to allow to limit and/or combine the functionalities best suited for the task, meaning if Windows feature configuration were to be applied, this should be possible without the Windows Registry configuration. Also, especially important, is to be able to apply Windows baselines configuration in one or more packages in either system or user context, without changing the code – which is why all configurations are possible using configuration files (json). This will help ensure minimal effort to create a new Windows desired state configuration, which is easily done without any code changes or re-signing the code. 
 
 ## Current features
 
 - WindowsApps: Remove Windows In-box Apps and Store Apps.
-- WindowsBranding: Configure OEM information and Registration (Coming soon)
+- WindowsBranding: Configure OEM information and Registration (PREVIEW)
 - WindowsFeatures
     - Enable and/or disable Windows features.
     - Enable and/or disable Windows optional features.

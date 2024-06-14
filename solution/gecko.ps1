@@ -1,5 +1,5 @@
 <# PSScriptInfo
-.VERSION 1.0.1.6
+.VERSION 1.0.2.2
 .GUID 10E1CBFB-EBAF-4329-87C1-225132847F61
 .AUTHOR @dotjesper
 .COMPANYNAME dotjesper.com
@@ -20,7 +20,7 @@
     Windows gecko can easily be implemented using more traditionally deployment methods, like OSD or other methods utilized.
     Current features:
     - WindowsApps: Remove Windows In-box Apps and Store Apps.
-    - WindowsBranding: Configure OEM information and Registration (Coming soon).
+    - WindowsBranding: Configure OEM information and Registration (PREVIEW).
     - WindowsFeatures
         - Enable and/or disable Windows features.
         - Enable and/or disable Windows optional features.
@@ -43,7 +43,7 @@
     If no configuration file is defined, script will look for .\config.json. If the configuration is not found or invalid, the script will exit.
 .PARAMETER CID
     Windows Time zone, culture, and regional settings value, allowing configuring culture, homelocation, and timezone from configuration file.
-    Value must match windowsTCR.configuration.[CID], e.g. "da-DK", "565652" or similar. See sample files for examples.
+    Value must match windowsTCR.configuration.CID.[CID], e.g. "DEN", "565652" or similar. See sample files for more examples.
 .PARAMETER logFile
     Start script logging to the desired logfile.
     If no log file is defined, the script will default to log file within '%ProgramData%\Microsoft\IntuneManagementExtension\Logs' folder, file name <config.metadata.title>.log
@@ -58,16 +58,17 @@
 .EXAMPLE
     .\gecko.ps1 -configFile ".\usercfg.json"
 .EXAMPLE
-    .\gecko.ps1 -configFile ".\usercfg.json" -CID "da-DK"
+    .\gecko.ps1 -configFile ".\usercfg.json" -CID "DEN"
 .EXAMPLE
     .\gecko.ps1 -configFile ".\usercfg.json" -logFile ".\usercfg.log" -Verbose
+.EXAMPLE
+    .\gecko.ps1 -configFile "https://<URL>/config.json"
 #>
 #requires -version 5.1
 [CmdletBinding()]
 param (
     #variables
     [Parameter(Mandatory = $false)]
-    [ValidateScript({ Test-Path $_ })]
     [string]$configFile = ".\config.json",
     [Parameter(Mandatory = $false)]
     [string]$CID,
@@ -81,28 +82,47 @@ param (
     [switch]$uninstall
 )
 begin {
-    #region :: environment
+    #region :: Environment
     #
     #endregion
-    #region :: configuation file
-    if (Test-Path -Path $configFile -PathType Leaf) {
+    #region :: Parse configuation file
+    if ($configFile.StartsWith("https://","CurrentCultureIgnoreCase")) {
+        Write-Verbose -Message "Downloading configuration [$configFile]"
         try {
-            $config = Get-Content -Path $configFile -Raw
-            $config = ConvertFrom-Json -InputObject $config
+            $config = Invoke-WebRequest -Uri $configFile -UseBasicParsing -ErrorAction Stop 
+            Write-Verbose -Message "Cloud configuration loaded [$($config | Select-Object -Expand StatusCode)]"
+            $config = ConvertFrom-Json -InputObject $config.Content
+            Write-Verbose -Message "Cloud configuration parsed"
         }
         catch {
-            Write-Output -InputObject "Error reading [$configFile], script exiting"
+            Write-Output -InputObject "Error reading cloud configuration file, script exiting [$($_.Exception.Response.StatusCode.Value__)]"
             throw $_.Exception.Message
             exit 1
         }
     }
     else {
-        Write-Output -InputObject "Cannot read [$configFile] - file not found, script exiting"
-        Write-Output -InputObject "> Go to https://github.com/dotjesper/windows-gecko/ to download sample configuration files"
-        exit 1
+        Write-Verbose -Message "Loading configuration [$configFile]"
+        if (Test-Path -Path $configFile -PathType Leaf) {
+            try {
+                $config = Get-Content -Path $configFile -Raw
+                Write-Verbose -Message "Configuration file loaded"
+                $config = ConvertFrom-Json -InputObject $config
+                Write-Verbose -Message "Configuration file parsed"
+            }
+            catch {
+                Write-Output -InputObject "Error reading configuration file, script exiting"
+                throw $_.Exception.Message
+                exit 1
+            }
+        }
+        else {
+            Write-Output -InputObject "Cannot parse [$configFile] - file not found, script exiting"
+            Write-Output -InputObject "> Go to https://github.com/dotjesper/windows-gecko/ to download sample configuration files"
+            exit 1
+        }
     }
     #endregion
-    #region :: environment configurations
+    #region :: Environment configurations
     [bool]$requireReboot = $($config.runConditions.requireReboot)
     [string]$envProgressPreference = $ProgressPreference
     [string]$envWarningPreference = $WarningPreference
@@ -111,7 +131,7 @@ begin {
         $WarningPreference = "SilentlyContinue"
     }
     #endregion
-    #region :: logfile
+    #region :: Logfile
     if ($($config.metadata.title)) {
         [string]$fLogContentpkg = "$($config.metadata.title -replace '[^a-zA-Z0-9]','-')"
         [string]$fLogContentFile = "$($Env:ProgramData)\Microsoft\IntuneManagementExtension\Logs\$fLogContentpkg.log"
@@ -144,7 +164,7 @@ begin {
     finally {}
     #endregion
     #
-    #region :: functions
+    #region :: Functions
     function fLogContent () {
         <#
         .SYNOPSIS
@@ -339,14 +359,25 @@ begin {
                 }
                 "remove" {
                     try {
-                        #Test if registry key exists and delete if found.
-                        if (-not (Get-ItemPropertyValue -Path "$($froot):\$($fpath)" -Name "$fname" -ErrorAction "SilentlyContinue")) {
-                            fLogContent -fLogContent "registry value [$($froot):\$($fpath)] : $($fname) not found" -fLogContentComponent "fRegistryItem"
+                        if ($fname -eq "*") {
+                            if (Test-Path -Path "$($froot):\$($fpath)") {
+                                fLogContent -fLogContent "registry path [$($froot):\$($fpath)] exists" -fLogContentComponent "fRegistryItem"
+                                fLogContent -fLogContent "deleting registry path [$($froot):\$($fpath)]" -fLogContentComponent "fRegistryItem"
+                                Remove-Item -Path "$($froot):\$($fpath)" -Recurse -Force | Out-Null
+                            }
+                            else {
+                                fLogContent -fLogContent "registry path [$($froot):\$($fpath)] not found" -fLogContentComponent "fRegistryItem"
+                            }
                         }
                         else {
-                            fLogContent -fLogContent "registry value [$($froot):\$($fpath)] : $($fname) found" -fLogContentComponent "fRegistryItem"
-                            fLogContent -fLogContent "deleting registry value [$($froot):\$($fpath)] : $($fname)" -fLogContentComponent "fRegistryItem"
-                            Remove-ItemProperty -Path "$($froot):\$($fpath)" -Name $($fname) -Force | Out-Null
+                            if (Get-ItemPropertyValue -Path "$($froot):\$($fpath)" -Name "$fname" -ErrorAction "SilentlyContinue") {
+                                fLogContent -fLogContent "registry value [$($froot):\$($fpath)] : $($fname) found" -fLogContentComponent "fRegistryItem"
+                                fLogContent -fLogContent "deleting registry value [$($froot):\$($fpath)] : $($fname)" -fLogContentComponent "fRegistryItem"
+                                Remove-ItemProperty -Path "$($froot):\$($fpath)" -Name $($fname) -Force | Out-Null    
+                            }
+                            else {
+                                fLogContent -fLogContent "registry value [$($froot):\$($fpath)] : $($fname) not found" -fLogContentComponent "fRegistryItem"
+                            }
                         }
                     }
                     catch {
@@ -363,7 +394,7 @@ begin {
     }
     #endregion
     #
-    #region :: logfile environment entries
+    #region :: Logfile environment entries
     $region = "environment"
     try {
         fLogContent -fLogContent "## $($config.metadata.title) by $($config.metadata.developer)" -fLogContentComponent "$region"
@@ -419,7 +450,7 @@ begin {
     finally {}
     #endregion
     #
-    #region :: check conditions
+    #region :: Check conditions
     $region = "conditions"
     if ($($config.runConditions.runScriptIn64bitPowerShell) -eq $true -and $([System.Environment]::Is64BitProcess) -eq $false) {
         fLogContent -fLogContent "Script must be run using 64-bit PowerShell" -fLogContentComponent "$region"
@@ -440,7 +471,7 @@ begin {
     #endregion
 }
 process {
-    #region :: windowsApps
+    #region :: WindowsApps
     $region = "windowsApps"
     fLogContent -fLogContent "WINDOWS APPS" -fLogContentComponent "$region"
     if ($($config.windowsApps.enabled) -eq $true) {
@@ -532,16 +563,48 @@ process {
     }
     #endregion
     #
-    #region: windowsBranding - PREVIEW
-    ## windowsBranding is coming soon ##
+    #region :: WindowsBranding - PREVIEW
+    $region = "windows branding - PREVIEW"
+    fLogContent -fLogContent "WINDOWS BRANDING" -fLogContentComponent "$region"
+    if ($($config.windowsBranding.enabled) -eq $true) {
+        fLogContent -fLogContent "Windows branding is enabled." -fLogContentComponent "$region"
+        #region :: OEM Information
+        foreach ($OEMInformationItem in $($config.windowsBranding.OEMInformationItems.PsObject.Properties)) {
+            if ([string]::IsNullOrEmpty($OEMInformationItem.Value)) {
+                fLogContent -fLogContent "> $($OEMInformationItem.Name) value is not defined" -fLogContentComponent "$region" -fLogContentType 2
+            }
+            else {
+                fLogContent -fLogContent "> $($OEMInformationItem.Name) value is defined" -fLogContentComponent "$region"
+                fLogContent -fLogContent "> Configuring $($OEMInformationItem.Name) value to '$($OEMInformationItem.Value)'" -fLogContentComponent "$region"
+                fRegistryItem -task "add" -froot "HKLM" -fpath "SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" -fname "$($OEMInformationItem.Name)" -fpropertyType "String" -fvalue "$($OEMInformationItem.Value)"
+            }
+        }
+        #endregion
+        #region :: Windows registation
+        foreach ($registationItem in $($config.windowsBranding.registationItems.PsObject.Properties)) {
+            if ([string]::IsNullOrEmpty($registationItem.Value)) {
+                fLogContent -fLogContent "> $($registationItem.Name) value is not defined" -fLogContentComponent "$region" -fLogContentType 2
+            }
+            else {
+                fLogContent -fLogContent "> $($registationItem.Name) value is defined" -fLogContentComponent "$region"
+                fLogContent -fLogContent "> Configuring $($registationItem.Name) value to '$($registationItem.Value)'" -fLogContentComponent "$region"
+                fRegistryItem -task "add" -froot "HKLM" -fpath "SOFTWARE\Microsoft\Windows NT\CurrentVersion" -fname "$($registationItem.Name)" -fpropertyType "String" -fvalue "$($registationItem.Value)"
+            }
+        }
+        #endregion
+        fLogContent -fLogContent "Windows branding finished" -fLogContentComponent "$region"
+    }
+    else {
+        fLogContent -fLogContent "Windows branding is disabled" -fLogContentComponent "$region"
+    }
     #endregion
     #
-    #region :: windowsFeatures
+    #region :: WindowsFeatures
     $region = "windowsFeatures"
     fLogContent -fLogContent "WINDOWS FEATURES" -fLogContentComponent "$region"
     if ($($config.windowsFeatures.enabled) -eq $true) {
         fLogContent -fLogContent "Windows Features is enabled" -fLogContentComponent "$region"
-        #region :: windowsFeatures
+        #region :: WindowsFeatures
         [array]$windowsFeatures = $($config.windowsFeatures.features)
         foreach ($windowsFeature in $windowsFeatures) {
             fLogContent -fLogContent "Processing $($windowsFeature.DisplayName)" -fLogContentComponent "$region"
@@ -595,7 +658,7 @@ process {
             }
         }
         #endregion
-        #region :: windowsOptionalFeatures
+        #region :: WindowsOptionalFeatures
         fLogContent -fLogContent "WINDOWS OPTIONAL FEATURES" -fLogContentComponent "windowsOptionalFeatures"
         [array]$windowsOptionalFeatures = $($config.windowsFeatures.optionalFeatures)
         foreach ($windowsOptionalFeature in $windowsOptionalFeatures) {
@@ -657,18 +720,21 @@ process {
     }
     #endregion
     #
-    #region :: windowsFiles
+    #region :: WindowsFiles
     $region = "windowsFiles"
     fLogContent -fLogContent "WINDOWS FILES" -fLogContentComponent "$region"
     if ($($config.windowsFiles.enabled) -eq $true) {
         fLogContent -fLogContent "Windows Files is enabled" -fLogContentComponent "$region"
-        #region :: Expand assets
         [string]$assetFile = $($config.windowsFiles.assetFile)
-        if (Test-Path -Path $assetFile -PathType Leaf) {
-            fLogContent -fLogContent "Windows Files found $assetFile" -fLogContentComponent "$region"
-            fLogContent -fLogContent "Windows Files is expanding $((Get-Item $assetFile).FullName)" -fLogContentComponent "$region"
+        if ($assetFile.StartsWith("https://","CurrentCultureIgnoreCase")) {
+            #region :: Download cloud asset file
+            fLogContent -fLogContent "Downloading asset file [$($assetFile)]" -fLogContentComponent "$region"
+            $assetOutFile = "$($Env:TEMP)\$(Split-Path -Leaf $assetFile)"
             try {
-                Expand-Archive -Path "$assetFile" -DestinationPath "$($Env:TEMP)" -Force
+                $webRequestResponse = Invoke-WebRequest -Uri $assetFile -OutFile $assetOutFile -PassThru -UseBasicParsing
+                if ($webRequestResponse.StatusCode -eq 200) {
+                    fLogContent -fLogContent "$(Split-Path -Leaf $assetFile) downloaded successfully [$($assetOutFile)]" -fLogContentComponent "$region"
+                }
             }
             catch {
                 $errMsg = $_.Exception.Message
@@ -678,11 +744,50 @@ process {
                 }
             }
             finally {}
+            #endregion
+            #region :: Expand cloud asset file
+            if (Test-Path -Path $assetOutFile -PathType Leaf) {
+                fLogContent -fLogContent "Windows Files found $($assetOutFile)" -fLogContentComponent "$region"
+                fLogContent -fLogContent "Windows Files is expanding $($assetOutFile)" -fLogContentComponent "$region"
+                try {
+                    Expand-Archive -Path "$assetOutFile" -DestinationPath "$($Env:TEMP)" -Force
+                }
+                catch {
+                    $errMsg = $_.Exception.Message
+                    fLogContent -fLogContent "ERROR: $errMsg" -fLogContentComponent "$region" -fLogContentType 3
+                    if ($exitOnError) {
+                        exit 1
+                    }
+                }
+                finally {}
+            }
+            else {
+                fLogContent -fLogContent "Asset file ($assetOutFile) not present" -fLogContentComponent "$region"
+            }
+            #endregion
         }
         else {
-            fLogContent -fLogContent "Asset file ($assetFile) not present" -fLogContentComponent "$region"
+            #region :: Expand local asset file
+            if (Test-Path -Path $assetFile -PathType Leaf) {
+                fLogContent -fLogContent "Windows Files found $assetFile" -fLogContentComponent "$region"
+                fLogContent -fLogContent "Windows Files is expanding $((Get-Item $assetFile).FullName)" -fLogContentComponent "$region"
+                try {
+                    Expand-Archive -Path "$assetFile" -DestinationPath "$($Env:TEMP)" -Force
+                }
+                catch {
+                    $errMsg = $_.Exception.Message
+                    fLogContent -fLogContent "ERROR: $errMsg" -fLogContentComponent "$region" -fLogContentType 3
+                    if ($exitOnError) {
+                        exit 1
+                    }
+                }
+                finally {}
+            }
+            else {
+                fLogContent -fLogContent "Asset file ($assetFile) not present" -fLogContentComponent "$region"
+            }
+            #endregion
         }
-        #endregion
         [array]$windowsFileItems = $($config.windowsFiles.items)
         foreach ($windowsFileItem in $windowsFileItems) {
             fLogContent -fLogContent "Processing $($windowsFileItem.name)" -fLogContentComponent "$region"
@@ -755,11 +860,11 @@ process {
     }
     #endregion
     #
-    #region :: windowsGroups - PREVIEW
+    #region :: WindowsGroups - PREVIEW
     ## windowsGroups is coming soon ##
     #endregion
     #
-    #region :: windowsRegistry
+    #region :: WindowsRegistry
     $region = "windowsRegistry"
     fLogContent -fLogContent "WINDOWS REGISTRY ITEMS" -fLogContentComponent "$region"
     if ($($config.windowsRegistry.enabled) -eq $true) {
@@ -851,6 +956,7 @@ process {
             do {
                 fLogContent -fLogContent "Sleeping 15 secunds before attemting unloading Default User Registry hive" -fLogContentComponent "$region"
                 Start-Sleep -Seconds 15
+                [gc]::Collect()
                 $processResult = Start-Process -FilePath "$env:WINDIR\system32\reg.exe" -ArgumentList "UNLOAD $defaultUserRegistryRoot\$defaultUserRegistryKey" -WindowStyle Hidden -PassThru -Wait
                 $counter++
                 fLogContent -fLogContent "Unloading Default User Registry hive attempted [ $($processResult.ExitCode) | $($counter) ]" -fLogContentComponent "$region"
@@ -871,7 +977,7 @@ process {
     }
     #endregion
     #
-    #region :: windowsRun
+    #region :: WindowsRun
     $region = "windowsRun"
     fLogContent -fLogContent "WINDOWS EXECUTABLES" -fLogContentComponent "$region"
     if ($($config.windowsRun.enabled) -eq $true) {
@@ -912,7 +1018,7 @@ process {
                     }
                 }
                 #endregion
-                #region :: download item
+                #region :: Download item
                 if ($($windowsExecutable.downloadUri)) {
                     fLogContent -fLogContent "Download Uri $($windowsExecutable.downloadUri)" -fLogContentComponent "$region"
                     fLogContent -fLogContent "Download target $($windowsExecutable.filePath)" -fLogContentComponent "$region"
@@ -932,7 +1038,7 @@ process {
                     finally {}
                 }
                 #endregion
-                #region :: executing item
+                #region :: Executing item
                 if (Test-Path $($windowsExecutable.filePath)) {
                     fLogContent -fLogContent "File path $($windowsExecutable.filePath) exists" -fLogContentComponent "$region"
                     fLogContent -fLogContent "File description $((Get-Item $($windowsExecutable.filePath)).VersionInfo.FileDescription)" -fLogContentComponent "$region"
@@ -973,7 +1079,7 @@ process {
     }
     #endregion
     #
-    #region :: windowsServices
+    #region :: WindowsServices
     $region = "windowsServices"
     fLogContent -fLogContent "WINDOWS SERVICES" -fLogContentComponent "$region"
     if ($($config.windowsServices.enabled) -eq $true) {
@@ -1017,7 +1123,7 @@ process {
     }
     #endregion
     #
-    #region :: windowsTCR - PREVIEW
+    #region :: WindowsTCR - PREVIEW
     $region = "windowsTCR - PREVIEW"
     fLogContent -fLogContent "WINDOWS TIME ZONE, CULTURE, AND REGIONAL SETTINGS MANAGER [PREVIEW]" -fLogContentComponent "$region"
     if ($($config.windowsTCR.enabled) -eq $true) {
@@ -1046,10 +1152,12 @@ process {
                     $CIDvalue = ($config.windowsTCR.settings.windowsTCRdefault)
                 }
             }
+            #region :: Computer name comparison
             if ($config.windowsTCR.settings.useComputerName) {
                 fLogContent -fLogContent "Computer name comparison enabled" -fLogContentComponent "$region"
+                fLogContent -fLogContent "> Computer name '$env:COMPUTERNAME'" -fLogContentComponent "$region"
                 foreach ($CIDitem in $config.windowsTCR.configurations.CID) {
-                    fLogContent -fLogContent "> Checking if $env:COMPUTERNAME $($config.windowsTCR.settings.useComputerNameOperator) '$CIDitem'" -fLogContentComponent "$region"
+                    fLogContent -fLogContent "> Checking if computer name $($config.windowsTCR.settings.useComputerNameOperator) '$CIDitem'" -fLogContentComponent "$region"
                     if ($env:COMPUTERNAME.$($config.windowsTCR.settings.useComputerNameOperator)("$CIDitem")) {
                         fLogContent -fLogContent "> $env:COMPUTERNAME $($config.windowsTCR.settings.useComputerNameOperator) '$CIDitem'" -fLogContentComponent "$region"
                         fLogContent -fLogContent "> Configuring CID value to '$CIDitem'" -fLogContentComponent "$region"
@@ -1068,6 +1176,8 @@ process {
             else {
                 fLogContent -fLogContent "Computer name comparison disabled" -fLogContentComponent "$region"
             }
+            #endregion
+            #region :: Configure WindowsTCR configurations
             if ($windowsTCRconfigurations.CID -contains $CIDvalue) {
                 fLogContent -fLogContent "Valid Windows Time zone, culture, and regional settings CID value, querying '$CIDvalue'" -fLogContentComponent "$region"
                 $windowsTCRSettings = $($config.windowsTCR.configurations) | Where-Object {$_.CID -eq $CIDvalue}
@@ -1125,12 +1235,13 @@ process {
                 fLogContent -fLogContent "Windows Time zone, culture, and regional settings CID value unknown or empty" -fLogContentComponent "$region" -fLogContentType 2
                 fLogContent -fLogContent "Windows Time zone, culture, and regional settings not re-configured" -fLogContentComponent "$region"
             }
+            #endregion
         }
         else {
             fLogContent -fLogContent "Windows Time zone, culture, and regional settings configurations not defined in configuration file" -fLogContentComponent "$region" -fLogContentType 2
             fLogContent -fLogContent "Windows Time zone, culture, and regional settings not re-configured" -fLogContentComponent "$region"
         }
-        #region :: Set Time Zone Automatically
+        #region :: Configure Set Time Zone Automatically
         if ($($config.windowsTCR.settings.SetTimeZoneAutomatically) -eq $true) {
             try {
                 fLogContent -fLogContent "Set time zone automatically is enabled" -fLogContentComponent "$region"
@@ -1154,6 +1265,47 @@ process {
         }
         else {
             fLogContent -fLogContent "Set time zone automatically is disabled" -fLogContentComponent "$region"
+        }
+        #endregion
+        #region :: Configure Windows NTP server
+        if ($($config.windowsTCR.settings.setNTPServer) -eq $true) {
+            fLogContent -fLogContent "Configuring NTP Server is enabled" -fLogContentComponent "$region"
+            try {
+                If ($($config.windowsTCR.settings.setNTPServerPeerlist) -ge 1) {
+                    fLogContent -fLogContent "> NTP Server peer list contains $($($config.windowsTCR.settings.setNTPServerPeerlist).Count) peer(s)" -fLogContentComponent "$region"
+                    foreach ($NTPServer in $($config.windowsTCR.settings.setNTPServerPeerlist)) { 
+                        #write-host "Host: $NTPServer"
+                        $NTPServerList += "$NTPServer "
+                    }
+                    fLogContent -fLogContent "> NTP Server peer list: $NTPServerList" -fLogContentComponent "$region"
+                    fLogContent -fLogContent "> Configuring NTP Server settings" -fLogContentComponent "$region"
+                    if ($((Get-Service -Name w32time -ErrorAction SilentlyContinue).Status) -eq "Running") {
+                        fLogContent -fLogContent "> Windows Time service is started" -fLogContentComponent "$region"
+                    }
+                    else {
+                        fLogContent -fLogContent "> Windows Time service is stopped, attemting to start the service" -fLogContentComponent "$region"
+                        start-service -Name w32time 
+                    }
+                    Start-Process -FilePath "$($env:Windir)\System32\w32tm.exe" -ArgumentList "/config /update /manualpeerlist:""$($NTPServerList.trim())"" /syncfromflags:MANUAL" -NoNewWindow -RedirectStandardOutput $false -RedirectStandardError $false -Wait
+                }
+                else {
+                    fLogContent -fLogContent "> NTP Server peer list is empty" -fLogContentComponent "$region"
+                }
+                fLogContent -fLogContent "> Restarting Windows Time service" -fLogContentComponent "$region"
+                Restart-Service -Name w32time -Force
+            }
+            catch {
+                $errMsg = $_.Exception.Message
+                fLogContent -fLogContent "ERROR: $errMsg" -fLogContentComponent "$region" -fLogContentType 3
+                if ($exitOnError) {
+                    exit 1
+                }
+            }
+            Finally {}
+            fLogContent -fLogContent "> Configuring NTP Server is finished" -fLogContentComponent "$region"
+        }
+        else {
+            fLogContent -fLogContent "Configuring NTP Server is disabled" -fLogContentComponent "$region"
         }
         #endregion
         fLogContent -fLogContent "Windows Time zone, culture, and regional settings manager finished" -fLogContentComponent "$region"

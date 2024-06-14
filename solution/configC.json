@@ -37,6 +37,18 @@
                 "RemoveProvisionedPackage": true
             },
             {
+                "DisplayName": "Cortana",
+                "Name": "Microsoft.549981C3F5F10",
+                "Remove": true,
+                "RemoveProvisionedPackage": true
+            },
+            {
+                "DisplayName": "Feedback Hub",
+                "Name": "Microsoft.WindowsFeedbackHub",
+                "Remove": true,
+                "RemoveProvisionedPackage": true
+            },
+            {
                 "DisplayName": "Microsoft 3D Builder",
                 "Name": "Microsoft.3DBuilder",
                 "Remove": true,
@@ -51,6 +63,12 @@
             {
                 "DisplayName": "Office",
                 "Name": "Microsoft.MicrosoftOfficeHub",
+                "Remove": true,
+                "RemoveProvisionedPackage": true
+            },
+            {
+                "DisplayName": "Outlook (new)",
+                "Name": "Microsoft.OutlookForWindows",
                 "Remove": true,
                 "RemoveProvisionedPackage": true
             },
@@ -111,6 +129,12 @@
             {
                 "DisplayName": "Sticky Notes",
                 "Name": "Microsoft.MicrosoftStickyNotes",
+                "Remove": true,
+                "RemoveProvisionedPackage": true
+            },
+            {
+                "DisplayName": "Tips",
+                "Name": "Microsoft.Getstarted",
                 "Remove": true,
                 "RemoveProvisionedPackage": true
             },
@@ -269,6 +293,13 @@
             }
         ],
         "optionalFeatures": [
+            {
+                "Name": "App.Support.QuickAssist~~~~0.0.1.0",
+                "DisplayName": "Quick Assists",
+                "Description": "Help family and friends with their PC or get help from them using Quick Assist. Use a remote connection to view their screen or request full control during a session, make annotations, use a laser pointer, and more to help fix PC problems.",
+                "State": "NotPresent",
+                "RestartNeeded": false
+            },
             {
                 "Name": "Media.WindowsMediaPlayer~~~~0.0.12.0",
                 "DisplayName": "Windows Media Player",
@@ -561,7 +592,7 @@
                 "description": "Download and install OneDriveSetup.exe for all users",
                 "informationURL": "",
                 "minOSbuild": "",
-                "maxOSbuild": "",
+                "maxOSbuild": "22621",
                 "downloadUri": "https://go.microsoft.com/fwlink/p/?LinkID=2182910",
                 "filePath": "%TEMP%\\OneDriveSetup.exe",
                 "ArgumentList": "/allusers /silent"
