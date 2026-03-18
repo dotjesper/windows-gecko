@@ -1,0 +1,7 @@
+# .gitattributes — Windows gecko project settings
+
+# Enforce LF line endings for all text files
+* text=auto eol=lf
+
+# Windows-specific files (keep CRLF for compatibility)
+*.cmd    text eol=crlf

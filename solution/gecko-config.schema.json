@@ -1,0 +1,923 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/dotjesper/windows-gecko/schema/gecko-config.schema.json",
+  "title": "Windows gecko Configuration",
+  "description": "Schema for Windows gecko desired state configuration files",
+  "type": "object",
+  "required": [
+    "metadata",
+    "runConditions"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this JSON schema"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Configuration metadata and version information",
+      "required": [
+        "enabled",
+        "installBehavior",
+        "guid",
+        "title",
+        "version"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable or disable this configuration"
+        },
+        "installBehavior": {
+          "type": "string",
+          "enum": [
+            "SYSTEM",
+            "USER"
+          ],
+          "description": "Installation context - SYSTEM for machine-wide, USER for per-user"
+        },
+        "guid": {
+          "type": "string",
+          "pattern": "^\\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\\}$",
+          "description": "Unique identifier GUID for this configuration"
+        },
+        "title": {
+          "type": "string",
+          "description": "Display title for the configuration"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration purpose"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL for more information"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+          "description": "Version number (e.g., 1.7.0.2)"
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Date in YYYY-MM-DD format"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher name or website"
+        },
+        "developer": {
+          "type": "string",
+          "description": "Developer name"
+        }
+      }
+    },
+    "runConditions": {
+      "type": "object",
+      "description": "Script execution conditions",
+      "properties": {
+        "runScriptIn64bitPowerShell": {
+          "type": "boolean",
+          "description": "Force script to run in 64-bit PowerShell"
+        },
+        "requireReboot": {
+          "type": "boolean",
+          "description": "Whether a reboot is required after execution"
+        },
+        "networkProbe": {
+          "type": "boolean",
+          "description": "Enable network connectivity probe during environment logging. Default: false",
+          "default": false
+        },
+        "networkProbeCount": {
+          "type": "integer",
+          "description": "Number of network probe iterations (1-10). Default: 3",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
+    "windowsBranding": {
+      "type": "object",
+      "description": "Windows OEM branding and registration configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Branding processing"
+        },
+        "OEMInformationItems": {
+          "type": "object",
+          "description": "OEM support information",
+          "properties": {
+            "SupportProvider": {
+              "type": "string",
+              "description": "Support provider name"
+            },
+            "SupportURL": {
+              "type": "string",
+              "description": "URL for support information"
+            },
+            "TradeinURL": {
+              "type": "string",
+              "description": "URL for trade-in information"
+            },
+            "RecycleURL": {
+              "type": "string",
+              "description": "URL for recycling information"
+            }
+          }
+        },
+        "registrationItems": {
+          "type": "object",
+          "description": "Windows registration information",
+          "properties": {
+            "RegisteredOwner": {
+              "type": "string",
+              "description": "Registered owner name"
+            },
+            "RegisteredOrganization": {
+              "type": "string",
+              "description": "Registered organization name"
+            }
+          }
+        }
+      }
+    },
+    "windowsConfig": {
+      "type": "object",
+      "description": "Windows configuration files (WinGet DSC)",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Config processing"
+        },
+        "configurations": {
+          "type": "array",
+          "description": "List of configuration files to apply",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "file"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Configuration name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Configuration description"
+              },
+              "file": {
+                "type": "string",
+                "description": "Configuration file path"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsApps": {
+      "type": "object",
+      "description": "Windows Store and inbox app removal configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Apps processing"
+        },
+        "apps": {
+          "type": "array",
+          "description": "List of apps to process",
+          "items": {
+            "type": "object",
+            "required": [
+              "DisplayName",
+              "Name",
+              "Remove",
+              "RemoveProvisionedPackage"
+            ],
+            "properties": {
+              "DisplayName": {
+                "type": "string",
+                "description": "Human-readable app name"
+              },
+              "Name": {
+                "type": "string",
+                "description": "Package name identifier"
+              },
+              "Remove": {
+                "type": "boolean",
+                "description": "Remove app for current users"
+              },
+              "RemoveProvisionedPackage": {
+                "type": "boolean",
+                "description": "Remove provisioned package to prevent installation for new users"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsFeatures": {
+      "type": "object",
+      "description": "Windows features and optional features configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Features processing"
+        },
+        "features": {
+          "type": "array",
+          "description": "Windows Optional Features (DISM features)",
+          "items": {
+            "type": "object",
+            "required": [
+              "FeatureName",
+              "State"
+            ],
+            "properties": {
+              "FeatureName": {
+                "type": "string",
+                "description": "Windows feature name"
+              },
+              "DisplayName": {
+                "type": "string",
+                "description": "Human-readable feature name"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Feature description"
+              },
+              "State": {
+                "type": "string",
+                "enum": [
+                  "Enabled",
+                  "Disabled",
+                  "LeaveAsIs"
+                ],
+                "description": "Desired state for the feature"
+              },
+              "RestartNeeded": {
+                "type": "boolean",
+                "description": "Whether restart is needed after change"
+              }
+            }
+          }
+        },
+        "optionalFeatures": {
+          "type": "array",
+          "description": "Windows Capabilities (Features on Demand)",
+          "items": {
+            "type": "object",
+            "required": [
+              "Name",
+              "State"
+            ],
+            "properties": {
+              "Name": {
+                "type": "string",
+                "description": "Capability name with version"
+              },
+              "DisplayName": {
+                "type": "string",
+                "description": "Human-readable capability name"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Capability description"
+              },
+              "State": {
+                "type": "string",
+                "enum": [
+                  "Installed",
+                  "NotPresent",
+                  "LeaveAsIs"
+                ],
+                "description": "Desired state for the capability"
+              },
+              "RestartNeeded": {
+                "type": "boolean",
+                "description": "Whether restart is needed after change"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsFiles": {
+      "type": "object",
+      "description": "File copy operations configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Files processing"
+        },
+        "assetFile": {
+          "type": "string",
+          "description": "ZIP archive containing source files"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of file copy operations",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "sourceFile",
+              "targetFile"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Operation name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description"
+              },
+              "minOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "maxOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "sourceFile": {
+                "type": "string",
+                "description": "Source filename within asset archive"
+              },
+              "targetFile": {
+                "type": "string",
+                "description": "Target file path (supports environment variables)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsGroups": {
+      "type": "object",
+      "description": "Windows local group membership configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Groups processing"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of group membership operations",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "SID",
+              "member"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Local group name"
+              },
+              "SID": {
+                "type": "string",
+                "pattern": "^S-1-[0-9-]+$",
+                "description": "Security Identifier (SID) for the group"
+              },
+              "member": {
+                "type": "string",
+                "description": "Member to add (e.g., CurrentUser, INTERACTIVE, or specific account)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WindowsPackageManager": {
+      "type": "object",
+      "description": "Windows Package Manager (winget) configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Package Manager processing"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of packages to install or uninstall",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "type",
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Package display name"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "install",
+                  "uninstall"
+                ],
+                "description": "Operation type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Package identifier"
+              },
+              "version": {
+                "type": "string",
+                "description": "Specific version to install (empty for latest)"
+              },
+              "scope": {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "machine"
+                ],
+                "description": "Installation scope"
+              },
+              "source": {
+                "type": "string",
+                "enum": [
+                  "winget",
+                  "msstore"
+                ],
+                "description": "Package source"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsRegistry": {
+      "type": "object",
+      "description": "Registry modification configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Registry processing"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of registry operations",
+          "items": {
+            "type": "object",
+            "required": [
+              "description",
+              "item",
+              "root",
+              "Path",
+              "Name"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Description of the registry change"
+              },
+              "minOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "maxOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "item": {
+                "type": "string",
+                "enum": [
+                  "add",
+                  "remove",
+                  "modify"
+                ],
+                "description": "Registry operation type"
+              },
+              "root": {
+                "type": "string",
+                "enum": [
+                  "HKLM",
+                  "HKCU",
+                  "HKDU",
+                  "HKCR",
+                  "HKU"
+                ],
+                "description": "Registry hive (HKDU = Default User)"
+              },
+              "Path": {
+                "type": "string",
+                "description": "Registry key path"
+              },
+              "Name": {
+                "type": "string",
+                "description": "Registry value name"
+              },
+              "Type": {
+                "type": "string",
+                "enum": [
+                  "REG_SZ",
+                  "REG_EXPAND_SZ",
+                  "REG_BINARY",
+                  "REG_DWORD",
+                  "REG_MULTI_SZ",
+                  "REG_QWORD"
+                ],
+                "description": "Registry value type"
+              },
+              "Value": {
+                "type": "string",
+                "description": "Registry value data"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsRun": {
+      "type": "object",
+      "description": "Executable run and download operations",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Run processing"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of executables to run",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "filePath"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Operation name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Operation description"
+              },
+              "informationURL": {
+                "type": "string",
+                "description": "URL for more information"
+              },
+              "minOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "maxOSbuild": {
+                "$ref": "#/$defs/osBuild"
+              },
+              "downloadUri": {
+                "type": "string",
+                "description": "URL to download executable (empty if local)"
+              },
+              "filePath": {
+                "type": "string",
+                "description": "Path to executable (supports environment variables)"
+              },
+              "ArgumentList": {
+                "type": "string",
+                "description": "Command line arguments"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsServices": {
+      "type": "object",
+      "description": "Windows services configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Services processing"
+        },
+        "services": {
+          "type": "array",
+          "description": "List of services to configure",
+          "items": {
+            "type": "object",
+            "required": [
+              "Name",
+              "StartType"
+            ],
+            "properties": {
+              "Name": {
+                "type": "string",
+                "description": "Service name"
+              },
+              "DisplayName": {
+                "type": "string",
+                "description": "Human-readable service name"
+              },
+              "StartType": {
+                "type": "string",
+                "enum": [
+                  "Automatic",
+                  "Manual",
+                  "Disabled",
+                  "Boot",
+                  "System",
+                  "LeaveAsIs"
+                ],
+                "description": "Service startup type (use LeaveAsIs to skip processing)"
+              },
+              "StopIfRunning": {
+                "type": "boolean",
+                "description": "Stop the service if currently running"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WindowsScheduledTasks": {
+      "type": "object",
+      "description": "Windows Scheduled Tasks configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows Scheduled Tasks processing"
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of scheduled tasks to configure",
+          "items": {
+            "type": "object",
+            "required": [
+              "TaskName",
+              "State"
+            ],
+            "properties": {
+              "TaskName": {
+                "type": "string",
+                "description": "Scheduled task name"
+              },
+              "DisplayName": {
+                "type": "string",
+                "description": "Human-readable task name"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Task description"
+              },
+              "State": {
+                "type": "string",
+                "enum": [
+                  "Enabled",
+                  "Disabled"
+                ],
+                "description": "Desired state for the task"
+              }
+            }
+          }
+        }
+      }
+    },
+    "windowsTCR": {
+      "type": "object",
+      "description": "Time zone, Culture, and Regional settings",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Windows TCR processing"
+        },
+        "settings": {
+          "type": "object",
+          "description": "TCR global settings",
+          "properties": {
+            "defaultCID": {
+              "type": "string",
+              "description": "Default CID value if none specified"
+            },
+            "copyUserInternationalSettingsToSystem": {
+              "type": "boolean",
+              "description": "Copy user international settings to system"
+            },
+            "xamlFile": {
+              "type": "string",
+              "description": "XAML file for TCR selection UI"
+            }
+          }
+        },
+        "computerNameComparison": {
+          "type": "object",
+          "description": "Derive CID from computer name",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable computer name comparison"
+            },
+            "operator": {
+              "type": "string",
+              "enum": [
+                "Contains",
+                "StartsWith",
+                "EndsWith",
+                "Equals"
+              ],
+              "description": "Operator for computer name matching"
+            }
+          }
+        },
+        "locationMarker": {
+          "type": "object",
+          "description": "Derive CID from registry location marker",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable location marker lookup"
+            },
+            "root": {
+              "type": "string",
+              "enum": [
+                "HKLM",
+                "HKCU"
+              ],
+              "description": "Registry root (HKLM or HKCU)"
+            },
+            "path": {
+              "type": "string",
+              "description": "Registry path (without root)"
+            },
+            "name": {
+              "type": "string",
+              "description": "Registry value name"
+            }
+          }
+        },
+        "ntpServer": {
+          "type": "object",
+          "description": "NTP server configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable NTP server configuration"
+            },
+            "peerList": {
+              "type": "array",
+              "description": "List of NTP server addresses",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "configurations": {
+          "type": "array",
+          "description": "Available TCR configurations",
+          "items": {
+            "type": "object",
+            "required": [
+              "CID",
+              "culture",
+              "homelocation",
+              "timezone"
+            ],
+            "properties": {
+              "CID": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9_-]+$",
+                "description": "Configuration identifier"
+              },
+              "description": {
+                "type": "string",
+                "description": "Configuration description"
+              },
+              "culture": {
+                "type": "string",
+                "pattern": "^[a-z]{2}-[A-Z]{2}$",
+                "description": "Culture code (e.g., da-DK, en-US)"
+              },
+              "homelocation": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "GeoID for home location"
+              },
+              "timezone": {
+                "type": "string",
+                "description": "Windows time zone identifier"
+              },
+              "setTimeZoneAutomatically": {
+                "type": "boolean",
+                "description": "Enable automatic time zone detection for this configuration"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "windowsBranding": {
+            "properties": {
+              "enabled": { "const": true }
+            },
+            "required": ["enabled"]
+          }
+        },
+        "required": ["windowsBranding"]
+      },
+      "then": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "installBehavior": { "const": "SYSTEM" }
+            }
+          }
+        },
+        "errorMessage": "windowsBranding requires installBehavior to be SYSTEM - this module writes to HKLM registry paths"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "windowsFeatures": {
+            "properties": {
+              "enabled": { "const": true }
+            },
+            "required": ["enabled"]
+          }
+        },
+        "required": ["windowsFeatures"]
+      },
+      "then": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "installBehavior": { "const": "SYSTEM" }
+            }
+          }
+        },
+        "errorMessage": "windowsFeatures requires installBehavior to be SYSTEM - enabling and disabling Windows features requires elevated SYSTEM context"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "windowsServices": {
+            "properties": {
+              "enabled": { "const": true }
+            },
+            "required": ["enabled"]
+          }
+        },
+        "required": ["windowsServices"]
+      },
+      "then": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "installBehavior": { "const": "SYSTEM" }
+            }
+          }
+        },
+        "errorMessage": "windowsServices requires installBehavior to be SYSTEM - configuring Windows services requires elevated SYSTEM context"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "windowsApps": {
+            "properties": {
+              "enabled": { "const": true },
+              "apps": {
+                "contains": {
+                  "properties": {
+                    "RemoveProvisionedPackage": { "const": true }
+                  },
+                  "required": ["RemoveProvisionedPackage"]
+                }
+              }
+            },
+            "required": ["enabled", "apps"]
+          }
+        },
+        "required": ["windowsApps"]
+      },
+      "then": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "installBehavior": { "const": "SYSTEM" }
+            }
+          }
+        },
+        "errorMessage": "windowsApps with RemoveProvisionedPackage requires installBehavior to be SYSTEM - removing provisioned packages requires elevated SYSTEM context"
+      }
+    }
+  ],
+  "$defs": {
+    "osBuild": {
+      "type": "string",
+      "pattern": "^([0-9]{5})?$",
+      "description": "Windows OS build number (5 digits, e.g., 19045, 22000, 22621, 26100) or empty string for no restriction"
+    }
+  }
+}

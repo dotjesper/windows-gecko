@@ -1,55 +1,87 @@
 {
-    "metadata": {
-        "enabled": false,
-        "installBehavior": "USER",
-        "guid": "{7F067932-705F-41E9-9FF0-20F4CEAACD7A}",
-        "title": "Windows TCR - Preview",
-        "description": "Windows Time zone, culture and regional settings manager - Preview",
-        "url": "",
-        "version": "0.9.8.5",
-        "date": "2023-03-24",
-        "publisher": "dotjesper.com",
-        "developer": "Jesper Nielsen"
+  "metadata": {
+    "enabled": false,
+    "installBehavior": "SYSTEM",
+    "guid": "{7F067932-705F-41E9-9FF0-20F4CEAACD7A}",
+    "title": "Windows TCR - Preview",
+    "description": "Windows Time zone, culture and regional settings manager - Preview",
+    "url": "",
+    "version": "0.9.9.1",
+    "date": "2023-12-11",
+    "publisher": "dotjesper.com",
+    "developer": "Jesper Nielsen"
+  },
+  "runConditions": {
+    "runScriptIn64bitPowerShell": true,
+    "requireReboot": false
+  },
+  "windowsTCR": {
+    "enabled": true,
+    "settings": {
+      "defaultCID": "DEN",
+      "copyUserInternationalSettingsToSystem": true,
+      "xamlFile": "gecko.xaml"
     },
-    "runConditions": {
-        "requireReboot": false,
-        "runScriptIn64bitPowerShell": true
+    "computerNameComparison": {
+      "enabled": false,
+      "operator": "Contains"
     },
-    "windowsTCR": {
-        "enabled": true,
-        "settings": {
-            "CopyUserInternationalSettingsToSystem": true,
-            "windowsTCRfilerRead": false,
-            "windowsTCRfileSave": false,
-            "windowsTCRxaml": "gecko.xaml",
-            "windowsTCRdefault": "da-DK"
-        },
-        "configuration": {
-            "de-DE": {
-                "culture": "de-DE",
-                "homelocation": 94,
-                "timezone": "W. Europe Standard Time"
-            },
-            "da-DK": {
-                "culture": "da-DK",
-                "homelocation": 61,
-                "timezone": "Romance Standard Time"
-            },
-            "fi-FI": {
-                "culture": "fi-FI",
-                "homelocation": 77,
-                "timezone": "FLE Standard Time"
-            },
-            "no-NO": {
-                "culture": "nb-NO",
-                "homelocation": 177,
-                "timezone": "Romance Standard Time"
-            },
-            "sv-SE": {
-                "culture": "sv-SE",
-                "homelocation": 221,
-                "timezone": "W. Europe Standard Time"
-            }
-        }
-    }
+    "locationMarker": {
+      "enabled": false,
+      "root": "HKLM",
+      "path": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\OOBE",
+      "name": "locationMarker"
+    },
+    "ntpServer": {
+      "enabled": false,
+      "peerList": [
+        "time.windows.com",
+        "time.nist.gov"
+      ]
+    },
+    "configurations": [
+      {
+        "CID": "DEN",
+        "description": "",
+        "culture": "da-DK",
+        "homelocation": 61,
+        "timezone": "Romance Standard Time"
+      },
+      {
+        "CID": "GER",
+        "description": "",
+        "culture": "de-DE",
+        "homelocation": 94,
+        "timezone": "W. Europe Standard Time"
+      },
+      {
+        "CID": "FIN",
+        "description": "",
+        "culture": "fi-FI",
+        "homelocation": 77,
+        "timezone": "FLE Standard Time"
+      },
+      {
+        "CID": "LAT",
+        "description": "",
+        "culture": "lv-LV",
+        "homelocation": 140,
+        "timezone": "FLE Standard Time"
+      },
+      {
+        "CID": "NOR",
+        "description": "",
+        "culture": "nb-NO",
+        "homelocation": 177,
+        "timezone": "Romance Standard Time"
+      },
+      {
+        "CID": "SWE",
+        "description": "",
+        "culture": "sv-SE",
+        "homelocation": 221,
+        "timezone": "W. Europe Standard Time"
+      }
+    ]
+  }
 }

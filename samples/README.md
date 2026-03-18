@@ -1,110 +1,211 @@
-# Samples files
+# Sample files
 
-These sample files, contains common settings for various tasks for configuring/setting the baseline for Windows endpoints.
+These sample files contain common settings for various tasks for configuring/setting the baseline for Windows endpoints.
 
 ## Content
 
-**baselineAppsC.json**: Baseline Windows Apps configuration settings.
+**baselineAppsC.json**
 
-Version: 1.5.0.3
+Title: Windows gecko-DSC-SYSTEM
 
-Target: Windows Apps
+Description: Baseline Windows Apps configuration settings
 
-Install behavior: SYSTEM
-
-**baselineFeaturesC.json**: Baseline Windows Feature configuration settings.
+Target: windowsApps
 
 Install behavior: SYSTEM
-
-Target: Windows features
-
-Version: 1.5.0.3
-
-**baselineFileCopy.json**: Baseline Windows File Copy configuration settings.
-
-Install behavior: SYSTEM
-
-Target: Windows Files
-
-Version: 1.0.0.1
-
-**baselineFileExcute.json**: Windows desired state configuration - Windows executables.
-
-Install behavior: SYSTEM
-
-Target: Windows Files
 
 Version: 1.0.1.0
 
+Date: 2022-12-07
 
-**baselineFileExplorerSettingsU.json**: Baseline Windows configuration settings for File Explorer.
+---
 
-Install behavior: USER
+**baselineFeaturesC.json**
 
-Target: Windows registry
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Baseline Windows Feature configuration settings
+
+Target: windowsFeatures
+
+Install behavior: SYSTEM
+
+Version: 1.5.0.3
+
+Date: 2022-03-20
+
+---
+
+**baselineFileCopy.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Windows desired state configuration
+
+Target: windowsFiles
+
+Install behavior: SYSTEM
+
+Version: 1.0.0.1
+
+Date: 2022-11-26
+
+---
+
+**baselineFileExcute.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Windows desired state configuration - Windows executables
+
+Target: windowsRun
+
+Install behavior: SYSTEM
+
+Version: 1.0.1.0
+
+Date: 2022-11-25
+
+---
+
+**baselineFileExplorerSettingsU.json**
+
+Title: Windows gecko-DSC-USER
+
+Description: Baseline Windows configuration settings for File Explorer.
+
+Target: windowsRegistry
+
+Install behavior: User
 
 Version: 1.1.0.3
 
-**baselineFileOpenBehaviorC.json**: Baseline Windows configuration settings for default file action (double click).
+Date: 2022-07-20
+
+---
+
+**baselineFileOpenBehaviorC.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Baseline Windows configuration settings for default file action (double click).
+
+Target: windowsRegistry
 
 Install behavior: SYSTEM
-
-Target: Windows registry
 
 Version: 1.5.0.3
 
-**baselineOfficeSettingsC.json**: Baseline Microsoft 365 Apps setting - Computer
+Date: 2022-03-20
+
+---
+
+**baselineOfficeSettingsC.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: PREVIEW: Baseline Microsoft 365 Apps setting - Computer
+
+Target: windowsRegistry
 
 Install behavior: SYSTEM
 
-Target: Windows registry
+Version: 0.9.1.0
 
-Version: 0.9.1.0 *PREVIEW*
+Date: 2022-03-20
 
-**baselineOfficeSettingsU.json**:  Baseline Microsoft 365 Apps setting - User
+---
+
+**baselineOfficeSettingsU.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: PREVIEW: Baseline Microsoft 365 Apps setting - User
+
+Target: windowsRegistry
 
 Install behavior: USER
 
-Target: Windows registry
+Version: 0.9.1.0
 
-Version: 0.9.1.0 *PREVIEW*
+Date: 2022-03-20
 
-**baselineOptional_RSAT_FeaturesC.json**:  Windows Remote Server Administration Tools (RSAT) optional feature configuration settings
+---
 
-Install behavior: SYSTEM
+**baselineOptional_RSAT_FeaturesC.json**
 
-Target: Windows Optional Features (Windows Capability )
+Title: Windows gecko-DSC-SYSTEM
 
-Version: 1.5.0.3
+Description: Windows Remote Server Administration Tools (RSAT) optional feature configuration settings
 
-**baselineServicesC.json**: Baseline Windows Services configuration settings.
-
-Install behavior: SYSTEM
-
-Target: Windows Services
-
-Version: 1.5.0.3
-
-**baselineSettingsC.json**: Baseline Windows configuration settings.
+Target: windowsOptionalFeatures
 
 Install behavior: SYSTEM
 
-Target: Windows registry
+Version: 1.5.0.3
+
+Date: 2022-03-20
+
+---
+
+**baselineServicesC.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Baseline Windows Services configuration settings
+
+Target: windowsServices
+
+Install behavior: SYSTEM
 
 Version: 1.5.0.3
 
-**baselineSettingsU.json**: Baseline Windows configuration settings.
+Date: 2022-03-20
+
+---
+
+**baselineSettingsC.json**
+
+Title: Windows gecko-DSC-SYSTEM
+
+Description: Baseline Windows configuration settings
+
+Target: windowsRegistry
+
+Install behavior: SYSTEM
+
+Version: 1.5.0.3
+
+Date: 2022-03-20
+
+---
+
+**baselineSettingsU.json**
+
+Title: Windows gecko-DSC-USER
+
+Description: Baseline Windows configuration settings
+
+Target: windowsRegistry
 
 Install behavior: USER
 
-Target: Windows registry
-
 Version: 1.5.0.3
 
-**baselineWindowsTCR.json**: Baseline Windows configuring Windows Time zone, Culture and Regional settings manager (Preview)
+Date: 2022-03-20
 
-Install behavior: SYSTEM / USER
+---
 
-Target: Windows Time zone, Culture and Regional settings
+**baselineWindowsTCR.json**
 
-Version: 0.9.8.5
+Title: Windows TCR - Preview
+
+Description: Windows Time zone, culture and regional settings manager - Preview
+
+Target: windowsTCR
+
+Install behavior: SYSTEM
+
+Version: 0.9.9.1
+
+Date: 2023-12-11

@@ -1,0 +1,13 @@
+<Configuration>
+    <ClipboardRedirection>Default</ClipboardRedirection>
+    <MappedFolders>
+        <MappedFolder>
+            <HostFolder>.\</HostFolder>
+            <ReadOnly>false</ReadOnly>
+        </MappedFolder>
+    </MappedFolders>
+    <Networking>Enabled</Networking>
+    <PrinterRedirection>Default</PrinterRedirection>
+    <ProtectedClient>Default</ProtectedClient>
+    <VGpu>Disable</VGpu>
+</Configuration>

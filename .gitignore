@@ -1,8 +1,9 @@
-#windows-rhythm
-#
+# .gitignore - Windows gecko project settings
+
 #files to ignore
+desktop.ini
 
 #directories to ignore
 .bin/
-.docs/
+.docs
 .notes/

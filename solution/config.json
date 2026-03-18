@@ -1,0 +1,67 @@
+{
+  "$schema": "./gecko-config.schema.json",
+  "metadata": {
+    "enabled": true,
+    "installBehavior": "SYSTEM",
+    "guid": "{00000000-0000-0000-0000-000000000000}",
+    "title": "Windows gecko",
+    "description": "Windows desired state configuration",
+    "url": "",
+    "version": "1.0.0.0",
+    "date": "2026-02-27",
+    "publisher": "dotjesper.com",
+    "developer": "Jesper Nielsen"
+  },
+  "runConditions": {
+    "runScriptIn64bitPowerShell": true,
+    "requireReboot": false
+  },
+  "windowsApps": {
+    "enabled": false,
+    "apps": []
+  },
+  "windowsBranding": {
+    "enabled": false
+  },
+  "windowsConfig": {
+    "enabled": false,
+    "configurations": []
+  },
+  "windowsFeatures": {
+    "enabled": false,
+    "features": [],
+    "optionalFeatures": []
+  },
+  "windowsFiles": {
+    "enabled": false,
+    "assetFile": "",
+    "items": []
+  },
+  "windowsGroups": {
+    "enabled": false,
+    "items": []
+  },
+  "WindowsPackageManager": {
+    "enabled": false,
+    "items": []
+  },
+  "windowsRegistry": {
+    "enabled": false,
+    "items": []
+  },
+  "windowsRun": {
+    "enabled": false,
+    "items": []
+  },
+  "windowsServices": {
+    "enabled": false,
+    "services": []
+  },
+  "WindowsScheduledTasks": {
+    "enabled": false,
+    "tasks": []
+  },
+  "windowsTCR": {
+    "enabled": false
+  }
+}

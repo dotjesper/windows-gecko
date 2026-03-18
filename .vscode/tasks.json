@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Launch Windows Sandbox",
+      "type": "shell",
+      "command": "start ${workspaceFolder}/solution/gecko.wsb",
+      "group": "none",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open PowerShell in Scripts",
+      "type": "shell",
+      "command": "Start-Process powershell ${input:runAsElevation} -ArgumentList '-NoExit', '-Command', 'Set-Location ''${workspaceFolder}/solution/scripts'''",
+      "group": "none",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "runAsElevation",
+      "type": "pickString",
+      "description": "Run as user or admin?",
+      "options": [
+        { "label": "User", "value": "" },
+        { "label": "Admin (elevated)", "value": "-Verb RunAs" }
+      ],
+      "default": ""
+    }
+  ]
+}
